@@ -1,8 +1,19 @@
 import asyncio
 import logging
+import logging.config
+import os
 
+import yaml
 from aiogram import Bot, Dispatcher, F
 from aiogram.fsm.storage.memory import MemoryStorage
+
+if not os.path.exists("Logs"):
+    os.makedirs("Logs")
+
+if __name__ == "__main__":
+    with open("config_data/logging_config.yaml", "rt") as f:
+        logging_config = yaml.safe_load(f.read())
+    logging.config.dictConfig(logging_config)
 
 from config_data.config import config
 from handlers.command_handlers import router as default_commands_router
@@ -11,7 +22,7 @@ from keyboards.set_menu import set_main_menu
 from lexicon.lexicon import translations
 from middlewares.outer_middlewares import TranslatorMiddleware
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("bot")
 
 
 async def main():

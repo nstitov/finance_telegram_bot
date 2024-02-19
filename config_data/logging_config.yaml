@@ -1,0 +1,80 @@
+version: 1
+disable_existing_loggers: True
+
+
+formatters:
+  default_formatter:
+    format: "[{asctime}] #{levelname:8} {filename}:{lineno} - {name} - {message}"
+    datefmt: "%Y-%m-%d %H:%M:%S"
+    style: "{"
+
+
+filters:
+  info_filter:
+    (): config_data.logging_services.InfoLogFilter
+
+
+handlers:
+  info_console_handler:
+    class: logging.StreamHandler
+    formatter: default_formatter
+    level: INFO
+    stream:  "ext://sys.stdout"
+
+  error_console_handler:
+    class: logging.StreamHandler
+    formatter: default_formatter
+    level: WARNING
+    stream:  "ext://sys.stderr"
+
+  info_file_handler:
+      class: config_data.logging_services.LogRotatiingFileHandler
+      formatter: default_formatter
+      level: INFO
+      filename: Logs/info.log
+      when: midnight
+      utc: False
+      backupCount: 30
+      filters: [info_filter]
+
+  error_file_handler:
+      class: logging.FileHandler
+      formatter: default_formatter
+      level: WARNING
+      filename: Logs/error.log
+      mode: a
+
+
+loggers:
+  database.db_init:
+    level: INFO
+    handlers: [info_file_handler, error_file_handler]
+
+  database.db_requests:
+    level: INFO
+    handlers: [info_file_handler, error_file_handler]
+
+  database.db_statistic_requests:
+    level: INFO
+    handlers: [info_file_handler, error_file_handler]
+
+  handlers.command_handlers:
+    level: INFO
+    handlers: [info_file_handler, error_file_handler]
+
+  handlers.user_handlers:
+    level: INFO
+    handlers: [info_file_handler, error_file_handler]
+
+  handlers.statistic_handlers:
+    level: INFO
+    handlers: [info_file_handler, error_file_handler]
+
+  bot:
+    level: INFO
+    handlers: [
+      info_file_handler,
+      error_file_handler,
+      info_console_handler,
+      error_console_handler
+      ]

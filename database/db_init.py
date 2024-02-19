@@ -1,7 +1,8 @@
+import logging
 import sqlite3
-from dataclasses import dataclass
-from datetime import date
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 categories = [
     "Продукты",
@@ -23,15 +24,6 @@ categories = [
 ]
 
 
-@dataclass
-class Transaction:
-    expense_name: str
-    cost: float
-    amount: int = 2
-    create_date: date = date.today()
-    comment: str = ""
-
-
 def init_database(database_name: Path) -> None:
     """Create initial required table into database."""
     with sqlite3.connect(database_name) as connection:
@@ -47,6 +39,7 @@ def init_database(database_name: Path) -> None:
         )
         """
         )
+        logger.info("Users table was exsisted or created.")
 
         cursor.execute(
             """
@@ -58,6 +51,7 @@ def init_database(database_name: Path) -> None:
         )
         """
         )
+        logger.info("Categories table was exsisted or created.")
 
         cursor.execute(
             """
@@ -69,6 +63,7 @@ def init_database(database_name: Path) -> None:
         )
         """
         )
+        logger.info("Expenses table was exsisted or created.")
 
         cursor.execute(
             """
@@ -83,6 +78,7 @@ def init_database(database_name: Path) -> None:
         )
         """
         )
+        logger.info("Transaction table was exsisted or created.")
 
 
 if __name__ == "__main__":

@@ -49,3 +49,7 @@ def create_confirm_transaction_keyboard(
         width=1,
     )
     return confirm_keyboard.as_markup()
+
+
+def create_correct_transaction_keyboard(change_):
+    pass
