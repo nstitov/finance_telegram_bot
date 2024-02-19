@@ -16,8 +16,9 @@ if __name__ == "__main__":
     logging.config.dictConfig(logging_config)
 
 from config_data.config import config
+from handlers.change_transaction_handlers import router as change_transaction_router
 from handlers.command_handlers import router as default_commands_router
-from handlers.user_hanlders import router as user_router
+from handlers.transactions_handlers import router as transactions_router
 from keyboards.set_menu import set_main_menu
 from lexicon.lexicon import translations
 from middlewares.outer_middlewares import TranslatorMiddleware
@@ -34,7 +35,8 @@ async def main():
     dp.callback_query.outer_middleware(TranslatorMiddleware())
 
     dp.include_router(default_commands_router)
-    dp.include_router(user_router)
+    dp.include_router(transactions_router)
+    dp.include_router(change_transaction_router)
 
     await set_main_menu(bot)
 

@@ -183,6 +183,7 @@ def get_expense_info_from_db(
             INNER JOIN Categories ON Expenses.category_id = Categories.category_id
             INNER JOIN Users ON Categories.user_id = Users.user_id
             WHERE expense_name=? AND telegram_id=?
+            ORDER BY expense_id
             """,
             (expense_name, telegram_id),
         )
@@ -231,7 +232,7 @@ def get_all_user_categories(telegram_id: int) -> Optional[list[str]]:
                 f"from database."
             )
             return categories
-        logger.warning(
+        logger.info(
             f"Categories names for user with Telegram ID {telegram_id} wasn't found "
             f"in database."
         )
@@ -264,9 +265,11 @@ def add_transaction_to_db(
     category_id = get_category_id_from_db(telegram_id, category_name)
     if not category_id:
         category_id = add_category_to_db(telegram_id, category_name)
-    expense_id = get_expense_info_from_db(telegram_id, expense_name)["expense_id"]
-    if not expense_id:
-        expense_id = add_expense_to_db(telegram_id, category_name)
+    expense_info = get_expense_info_from_db(telegram_id, expense_name)
+    if not expense_info:
+        expense_id = add_expense_to_db(expense_name, category_id)
+    else:
+        expense_id = expense_info["expense_id"]
     with sqlite3.connect(DATABASE_NAME) as connection:
         cursor = connection.cursor()
         cursor.execute(
@@ -278,6 +281,6 @@ def add_transaction_to_db(
             (expense_id, cost, created_date.isoformat(), amount, comment),
         )
         logger.info(
-            f"Transaction for {expense_name} from user with Telegram ID was added to "
-            f"database."
+            f"Transaction for {expense_name} from user with Telegram ID {telegram_id} "
+            f"was added to database."
         )

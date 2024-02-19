@@ -59,14 +59,7 @@ LEXICON_RU = {
     "transaction_confirm_button": "Добавить расход",
     "transaction_correct_button": "Редактировать расход",
     "transaction_cancel_button": "Отменить расход",
-    "transaction_incorrect_format": (
-        "<b>Вы ввели расход в неверном формате!</b>\n"
-        "Формат ввода расхода имеет вид:\n"
-        "<b>&lt;Название продукта&gt; &lt;сумма&gt;</b>\n\n"
-        "Например:\n"
-        "Молоко 78 или Кофе 199\n\n"
-        "Чтобы выйти из режима ввода расходов отправьте команду /cancel"
-    ),
+    "transaction_incorrect_format": "<b>Вы ввели расход в неверном формате!</b>\n\n",
     "transaction_category_added": "Вы добавили новую категорию: {category_name}\n\n",
     "transaction_expense_added": (
         "Вы добавили {expense_name} в категорию {category_name}\n\n"
@@ -89,4 +82,50 @@ LEXICON_RU = {
         "'Отменить расход'\n\n"
         "Чтобы выйти из режима ввода расходов отправьте команду /cancel"
     ),
+    "transaction_without_comment": "отсутствует",
+    "transaction_correct_expense_name_button": "Изменить название расхода",
+    "transaction_correct_category_button": "Изменить категорию",
+    "transaction_correct_cost_button": "Изменить стоимость",
+    "transaction_correct_amount_button": "Изменить количество",
+    "transaction_correct_created_date_button": "Изменить дату",
+    "transaction_correct_comment_button": "Добавить комментарий",
+    "transaction_change_expense_name": (
+        "<b>Введите новое название расхода</b>\n\n"
+        "Название расхода должно удовлетворять следующим требованиям:\n"
+        "1. Состоять только из цифр и букв\n"
+        "2. В названии расхода должено быть не более 50 символов"
+        "3. Название расхода может состоять из нескольких слов, разделённых пробелами"
+    ),
+    "transaction_change_category": (
+        "Выберите новую категорию из Ваших категорий или создайте новую"
+    ),
+    "transaction_change_cost": (
+        "<b>Введите новую стоимость</b>\n"
+        "Стоимость может быть как целым числом, так и с дробной частью"
+    ),
+    "transaction_change_amount": (
+        "<b>Введите новое количество\n</b>Количество может быть только целым числом"
+    ),
+    "transaction_change_created_date": (
+        "<b>Введите новую дату расхода</b>\n "
+        "Дата должна быть в формате <b>гггг-мм-дд</b>"
+    ),
+    "transaction_change_comment": (
+        "<b>Введите комменатрий к расходу</b>\n"
+        "В комментарии должено быть не более 50 символов"
+    ),
+    "transaction_incorrect_expense_name": (
+        "<b>Название расхода не соответствует требованиям</b>\n\n"
+        "Название расхода должно удовлетворять следующим требованиям:\n"
+        "1. Состоять только из цифр и букв\n"
+        "2. В названии расхода должено быть не более 50 символов"
+        "3. Название расхода может состоять из нескольких слов, разделённых пробелами"
+    ),
+    "transaction_incorrect_cost": "<b>Стоимость расхода не соответсвует требованиям",
+    "transaction_incorrect_amount": "<b>Количество не является целым числом</b>",
+    "transaction_incorrect_created_date": (
+        "<b>Дата не соответствует требованиям</b>\n\n"
+        "Дата должна быть в формате <b>гггг-мм-дд</b>"
+    ),
+    "transaction_incorrect_comment": "<b>Размер комментария превышает допустимый</b>",
 }

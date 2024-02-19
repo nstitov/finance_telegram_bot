@@ -1,0 +1,12 @@
+[2024-02-19 18:13:27] #WARNING  db_requests.py:234 - database.db_requests - Categories names for user with Telegram ID 474783927 wasn't found in database.
+[2024-02-19 18:17:48] #WARNING  db_requests.py:234 - database.db_requests - Categories names for user with Telegram ID 474783927 wasn't found in database.
+[2024-02-19 18:18:54] #WARNING  db_requests.py:234 - database.db_requests - Categories names for user with Telegram ID 474783927 wasn't found in database.
+[2024-02-19 18:48:37] #WARNING  db_requests.py:130 - database.db_requests - Category ID for category Дом and telegram user with Telegram ID 474783927 wasn't found in database.
+[2024-02-19 18:58:01] #WARNING  db_requests.py:130 - database.db_requests - Category ID for category Продукты and telegram user with Telegram ID 474783927 wasn't found in database.
+[2024-02-19 18:58:01] #WARNING  db_requests.py:67 - database.db_requests - Info for user with Telegram ID 474783927 wasn't found in database.
+[2024-02-19 18:59:17] #WARNING  db_requests.py:130 - database.db_requests - Category ID for category Продукты and telegram user with Telegram ID 474783927 wasn't found in database.
+[2024-02-19 18:59:22] #WARNING  db_requests.py:67 - database.db_requests - Info for user with Telegram ID 474783927 wasn't found in database.
+[2024-02-19 19:00:23] #WARNING  db_requests.py:130 - database.db_requests - Category ID for category Продукты and telegram user with Telegram ID 474783927 wasn't found in database.
+[2024-02-19 19:01:54] #WARNING  db_requests.py:130 - database.db_requests - Category ID for category Продукты and telegram user with Telegram ID 474783927 wasn't found in database.
+[2024-02-19 19:02:19] #WARNING  db_requests.py:130 - database.db_requests - Category ID for category Машина and telegram user with Telegram ID 474783927 wasn't found in database.
+[2024-02-19 19:02:47] #WARNING  db_requests.py:130 - database.db_requests - Category ID for category Кафе and telegram user with Telegram ID 474783927 wasn't found in database.

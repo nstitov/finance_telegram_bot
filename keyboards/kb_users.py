@@ -51,5 +51,22 @@ def create_confirm_transaction_keyboard(
     return confirm_keyboard.as_markup()
 
 
-def create_correct_transaction_keyboard(change_):
-    pass
+def create_correct_transaction_keyboard(
+    change_expense_name_button_text: str,
+    change_category_button_text: str,
+    change_cost_button_text: str,
+    change_amount_button_text: str,
+    change_created_date_button_text: str,
+    change_comment_button_text: str,
+) -> ReplyKeyboardMarkup:
+    correct_keyboard = ReplyKeyboardBuilder()
+    correct_keyboard.row(
+        KeyboardButton(text=change_expense_name_button_text),
+        KeyboardButton(text=change_category_button_text),
+        KeyboardButton(text=change_cost_button_text),
+        KeyboardButton(text=change_amount_button_text),
+        KeyboardButton(text=change_created_date_button_text),
+        KeyboardButton(text=change_comment_button_text),
+        width=2,
+    )
+    return correct_keyboard.as_markup()
