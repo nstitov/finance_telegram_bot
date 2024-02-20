@@ -1,207 +1,73 @@
-[2024-02-19 18:13:19] #INFO     command_handlers.py:25 - handlers.command_handlers - User Titov Nikita sent /start command.
-[2024-02-19 18:13:19] #INFO     db_requests.py:34 - database.db_requests - User with Telegram ID 474783927 was added to database.
-[2024-02-19 18:13:23] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:13:27] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:17:43] #INFO     command_handlers.py:42 - handlers.command_handlers - User Titov Nikita sent /cancel command from FSMAddTransaction:confirm_transaction state.
-[2024-02-19 18:17:44] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:17:48] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:18:48] #INFO     command_handlers.py:42 - handlers.command_handlers - User Titov Nikita sent /cancel command from FSMAddTransaction:confirm_transaction state.
-[2024-02-19 18:18:50] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:18:54] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:19:42] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:21:04] #INFO     command_handlers.py:42 - handlers.command_handlers - User Titov Nikita sent /cancel command from FSMAddTransaction:fill_transaction state.
-[2024-02-19 18:21:05] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:22:13] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:22:13] #INFO     db_requests.py:234 - database.db_requests - Categories names for user with Telegram ID 474783927 wasn't found in database.
-[2024-02-19 18:30:18] #INFO     command_handlers.py:25 - handlers.command_handlers - User Titov Nikita sent /start command.
-[2024-02-19 18:30:18] #INFO     db_requests.py:34 - database.db_requests - User with Telegram ID 474783927 was added to database.
-[2024-02-19 18:30:20] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:30:30] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:30:30] #INFO     db_requests.py:229 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 18:32:55] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:33:07] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:33:07] #INFO     db_requests.py:229 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 18:36:09] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:36:22] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:36:22] #INFO     db_requests.py:229 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 18:36:38] #INFO     db_requests.py:124 - database.db_requests - Category ID for category Продукты for user with Telegram ID 474783927 was got from database.
-[2024-02-19 18:36:41] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:36:41] #INFO     db_requests.py:153 - database.db_requests - Expense 474783927 in category with ID Продукты was added to database.
-[2024-02-19 18:36:41] #INFO     db_requests.py:282 - database.db_requests - Transaction for Молоко from user with Telegram ID was added to database.
-[2024-02-19 18:40:09] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:44:27] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:46:58] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:47:45] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:47:45] #INFO     db_requests.py:229 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 18:47:50] #INFO     db_requests.py:124 - database.db_requests - Category ID for category Продукты for user with Telegram ID 474783927 was got from database.
-[2024-02-19 18:47:50] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:47:50] #INFO     db_requests.py:153 - database.db_requests - Expense 474783927 in category with ID Продукты was added to database.
-[2024-02-19 18:47:50] #INFO     db_requests.py:282 - database.db_requests - Transaction for Молоко from user with Telegram ID 474783927 was added to database.
-[2024-02-19 18:47:59] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:47:59] #INFO     db_requests.py:229 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 18:48:02] #INFO     db_requests.py:124 - database.db_requests - Category ID for category Продукты for user with Telegram ID 474783927 was got from database.
-[2024-02-19 18:48:02] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:48:02] #INFO     db_requests.py:153 - database.db_requests - Expense 474783927 in category with ID Продукты was added to database.
-[2024-02-19 18:48:02] #INFO     db_requests.py:282 - database.db_requests - Transaction for Кофе from user with Telegram ID 474783927 was added to database.
-[2024-02-19 18:48:16] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Бумага for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:48:16] #INFO     db_requests.py:229 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 18:48:37] #INFO     db_requests.py:63 - database.db_requests - Info for user with Telegram ID 474783927 was got from database.
-[2024-02-19 18:48:37] #INFO     db_requests.py:90 - database.db_requests - Category Дом for user with Telegram ID 474783927 was added to database.
-[2024-02-19 18:48:37] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Бумага for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:48:37] #INFO     db_requests.py:153 - database.db_requests - Expense 474783927 in category with ID Дом was added to database.
-[2024-02-19 18:48:37] #INFO     db_requests.py:282 - database.db_requests - Transaction for Бумага from user with Telegram ID 474783927 was added to database.
-[2024-02-19 18:53:48] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:53:55] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:53:55] #INFO     db_requests.py:229 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 18:55:12] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:55:16] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:55:16] #INFO     db_requests.py:229 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 18:57:33] #INFO     db_init.py:42 - database.db_init - Users table was exsisted or created.
-[2024-02-19 18:57:33] #INFO     db_init.py:54 - database.db_init - Categories table was exsisted or created.
-[2024-02-19 18:57:33] #INFO     db_init.py:66 - database.db_init - Expenses table was exsisted or created.
-[2024-02-19 18:57:33] #INFO     db_init.py:81 - database.db_init - Transaction table was exsisted or created.
-[2024-02-19 18:57:46] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:57:53] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:57:53] #INFO     db_requests.py:234 - database.db_requests - Categories names for user with Telegram ID 474783927 wasn't found in database.
-[2024-02-19 18:58:39] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 18:58:43] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 18:58:43] #INFO     db_requests.py:234 - database.db_requests - Categories names for user with Telegram ID 474783927 wasn't found in database.
-[2024-02-19 19:00:09] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 19:00:12] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 19:00:12] #INFO     db_requests.py:234 - database.db_requests - Categories names for user with Telegram ID 474783927 wasn't found in database.
-[2024-02-19 19:01:14] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 19:01:16] #INFO     command_handlers.py:42 - handlers.command_handlers - User Titov Nikita sent /cancel command from FSMAddTransaction:fill_transaction state.
-[2024-02-19 19:01:20] #INFO     command_handlers.py:25 - handlers.command_handlers - User Titov Nikita sent /start command.
-[2024-02-19 19:01:20] #INFO     db_requests.py:34 - database.db_requests - User with Telegram ID 474783927 was added to database.
-[2024-02-19 19:01:23] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 19:01:32] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 19:01:32] #INFO     db_requests.py:234 - database.db_requests - Categories names for user with Telegram ID 474783927 wasn't found in database.
-[2024-02-19 19:01:54] #INFO     db_requests.py:63 - database.db_requests - Info for user with Telegram ID 474783927 was got from database.
-[2024-02-19 19:01:54] #INFO     db_requests.py:90 - database.db_requests - Category Продукты for user with Telegram ID 474783927 was added to database.
-[2024-02-19 19:01:54] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 19:01:54] #INFO     db_requests.py:153 - database.db_requests - Expense Молоко in category with ID 1 was added to database.
-[2024-02-19 19:01:54] #INFO     db_requests.py:282 - database.db_requests - Transaction for Молоко from user with Telegram ID 474783927 was added to database.
-[2024-02-19 19:02:06] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Колеса for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 19:02:06] #INFO     db_requests.py:229 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 19:02:19] #INFO     db_requests.py:63 - database.db_requests - Info for user with Telegram ID 474783927 was got from database.
-[2024-02-19 19:02:19] #INFO     db_requests.py:90 - database.db_requests - Category Машина for user with Telegram ID 474783927 was added to database.
-[2024-02-19 19:02:19] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Колеса for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 19:02:19] #INFO     db_requests.py:153 - database.db_requests - Expense Колеса in category with ID 2 was added to database.
-[2024-02-19 19:02:19] #INFO     db_requests.py:282 - database.db_requests - Transaction for Колеса from user with Telegram ID 474783927 was added to database.
-[2024-02-19 19:02:32] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Суши for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 19:02:32] #INFO     db_requests.py:229 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 19:02:47] #INFO     db_requests.py:63 - database.db_requests - Info for user with Telegram ID 474783927 was got from database.
-[2024-02-19 19:02:47] #INFO     db_requests.py:90 - database.db_requests - Category Кафе for user with Telegram ID 474783927 was added to database.
-[2024-02-19 19:02:47] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Суши for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 19:02:47] #INFO     db_requests.py:153 - database.db_requests - Expense Суши in category with ID 3 was added to database.
-[2024-02-19 19:02:47] #INFO     db_requests.py:282 - database.db_requests - Transaction for Суши from user with Telegram ID 474783927 was added to database.
-[2024-02-19 19:02:51] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Хлеб for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 19:02:51] #INFO     db_requests.py:229 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 19:03:04] #INFO     db_requests.py:124 - database.db_requests - Category ID for category Продукты for user with Telegram ID 474783927 was got from database.
-[2024-02-19 19:03:04] #INFO     db_requests.py:199 - database.db_requests - Expense info for expense Хлеб for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 19:03:04] #INFO     db_requests.py:153 - database.db_requests - Expense Хлеб in category with ID 1 was added to database.
-[2024-02-19 19:03:04] #INFO     db_requests.py:282 - database.db_requests - Transaction for Хлеб from user with Telegram ID 474783927 was added to database.
-[2024-02-19 21:31:46] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 21:31:53] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 21:31:53] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 21:39:00] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 21:39:04] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 21:39:04] #INFO     transactions_handlers.py:47 - handlers.transactions_handlers - There is no expense Кофе in the database. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:39:04] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 21:39:06] #INFO     transactions_handlers.py:105 - handlers.transactions_handlers - Category was defined for new expense. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:39:09] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 21:39:14] #INFO     transactions_handlers.py:283 - handlers.transactions_handlers - Request to change amount was got. FSM was transformed to FSMChangeTransaction:change_amount state.
-[2024-02-19 21:40:16] #INFO     command_handlers.py:42 - handlers.command_handlers - User Titov Nikita sent /cancel command from FSMChangeTransaction:change_amount state.
-[2024-02-19 21:40:20] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 21:40:24] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 21:40:24] #INFO     transactions_handlers.py:47 - handlers.transactions_handlers - There is no expense Кофе in the database. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:40:24] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 21:40:25] #INFO     transactions_handlers.py:105 - handlers.transactions_handlers - Category was defined for new expense. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:40:27] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 21:40:43] #INFO     transactions_handlers.py:283 - handlers.transactions_handlers - Request to change amount was got. FSM was transformed to FSMChangeTransaction:change_amount state.
-[2024-02-19 21:44:01] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 21:44:05] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 21:44:05] #INFO     transactions_handlers.py:47 - handlers.transactions_handlers - There is no expense Кофе in the database. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:44:05] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 21:44:08] #INFO     transactions_handlers.py:105 - handlers.transactions_handlers - Category was defined for new expense. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:44:09] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 21:44:17] #INFO     transactions_handlers.py:283 - handlers.transactions_handlers - Request to change amount was got. FSM was transformed to FSMChangeTransaction:change_amount state.
-[2024-02-19 21:44:32] #INFO     change_transaction_handlers.py:117 - handlers.change_transaction_handlers - Amount is changed.
-[2024-02-19 21:47:44] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 21:47:51] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 21:47:51] #INFO     transactions_handlers.py:47 - handlers.transactions_handlers - There is no expense Кофе in the database. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:47:51] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 21:47:53] #INFO     transactions_handlers.py:105 - handlers.transactions_handlers - Category was defined for new expense. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:48:23] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 21:48:24] #INFO     transactions_handlers.py:283 - handlers.transactions_handlers - Request to change amount was got. FSM was transformed to FSMChangeTransaction:change_amount state.
-[2024-02-19 21:48:31] #INFO     change_transaction_handlers.py:117 - handlers.change_transaction_handlers - Amount is changed.
-[2024-02-19 21:51:23] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 21:51:27] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 21:51:27] #INFO     transactions_handlers.py:47 - handlers.transactions_handlers - There is no expense Кофе in the database. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:51:27] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 21:51:30] #INFO     transactions_handlers.py:105 - handlers.transactions_handlers - Category was defined for new expense. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:51:31] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 21:51:38] #INFO     transactions_handlers.py:283 - handlers.transactions_handlers - Request to change amount was got. FSM was transformed to FSMChangeTransaction:change_amount state.
-[2024-02-19 21:51:41] #INFO     change_transaction_handlers.py:117 - handlers.change_transaction_handlers - Amount is changed.
-[2024-02-19 21:51:44] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 21:51:50] #INFO     transactions_handlers.py:283 - handlers.transactions_handlers - Request to change amount was got. FSM was transformed to FSMChangeTransaction:change_amount state.
-[2024-02-19 21:51:54] #INFO     change_transaction_handlers.py:117 - handlers.change_transaction_handlers - Amount is changed.
-[2024-02-19 21:51:56] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 21:51:58] #INFO     transactions_handlers.py:292 - handlers.transactions_handlers - Request to change created_date was got. FSM was transformed to FSMChangeTransaction:change_created_date state.
-[2024-02-19 21:52:32] #INFO     change_transaction_handlers.py:184 - handlers.change_transaction_handlers - Created date for changing is incorrect.
-[2024-02-19 21:53:36] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 21:53:39] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 21:53:39] #INFO     transactions_handlers.py:47 - handlers.transactions_handlers - There is no expense Кофе in the database. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:53:39] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 21:53:40] #INFO     transactions_handlers.py:105 - handlers.transactions_handlers - Category was defined for new expense. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:53:42] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 21:53:43] #INFO     transactions_handlers.py:283 - handlers.transactions_handlers - Request to change amount was got. FSM was transformed to FSMChangeTransaction:change_amount state.
-[2024-02-19 21:53:50] #INFO     change_transaction_handlers.py:145 - handlers.change_transaction_handlers - Amount for changing is incorrect.
-[2024-02-19 21:53:59] #INFO     change_transaction_handlers.py:117 - handlers.change_transaction_handlers - Amount is changed.
-[2024-02-19 21:54:01] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 21:54:05] #INFO     transactions_handlers.py:292 - handlers.transactions_handlers - Request to change created_date was got. FSM was transformed to FSMChangeTransaction:change_created_date state.
-[2024-02-19 21:54:20] #INFO     change_transaction_handlers.py:184 - handlers.change_transaction_handlers - Created date for changing is incorrect.
-[2024-02-19 21:54:59] #INFO     change_transaction_handlers.py:184 - handlers.change_transaction_handlers - Created date for changing is incorrect.
-[2024-02-19 21:58:19] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 21:58:23] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 21:58:23] #INFO     transactions_handlers.py:47 - handlers.transactions_handlers - There is no expense Кофе in the database. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:58:23] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 21:58:25] #INFO     transactions_handlers.py:105 - handlers.transactions_handlers - Category was defined for new expense. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 21:58:27] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 21:58:48] #INFO     transactions_handlers.py:292 - handlers.transactions_handlers - Request to change created_date was got. FSM was transformed to FSMChangeTransaction:change_created_date state.
-[2024-02-19 21:59:59] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 22:00:03] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 22:00:03] #INFO     transactions_handlers.py:47 - handlers.transactions_handlers - There is no expense Кофе in the database. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 22:00:03] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 22:00:05] #INFO     transactions_handlers.py:105 - handlers.transactions_handlers - Category was defined for new expense. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 22:00:08] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 22:00:11] #INFO     transactions_handlers.py:292 - handlers.transactions_handlers - Request to change created_date was got. FSM was transformed to FSMChangeTransaction:change_created_date state.
-[2024-02-19 22:00:22] #INFO     change_transaction_handlers.py:156 - handlers.change_transaction_handlers - Created date is changed.
-[2024-02-19 22:00:28] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 22:00:30] #INFO     transactions_handlers.py:292 - handlers.transactions_handlers - Request to change created_date was got. FSM was transformed to FSMChangeTransaction:change_created_date state.
-[2024-02-19 22:00:35] #INFO     change_transaction_handlers.py:156 - handlers.change_transaction_handlers - Created date is changed.
-[2024-02-19 22:00:40] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 22:00:43] #INFO     transactions_handlers.py:274 - handlers.transactions_handlers - Request to change cost was got. FSM was transformed to FSMChangeTransaction:change_cost state.
-[2024-02-19 22:00:53] #INFO     change_transaction_handlers.py:78 - handlers.change_transaction_handlers - Cost is changed.
-[2024-02-19 22:01:00] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 22:01:03] #INFO     transactions_handlers.py:302 - handlers.transactions_handlers - Request to change comment was got. FSM was transformed to FSMChangeTransaction:change_comment state.
-[2024-02-19 22:02:16] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-02-19 22:02:26] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 22:02:26] #INFO     transactions_handlers.py:47 - handlers.transactions_handlers - There is no expense Кофе in the database. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 22:02:26] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 22:02:31] #INFO     transactions_handlers.py:105 - handlers.transactions_handlers - Category was defined for new expense. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 22:02:38] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 22:02:40] #INFO     transactions_handlers.py:302 - handlers.transactions_handlers - Request to change comment was got. FSM was transformed to FSMChangeTransaction:change_comment state.
-[2024-02-19 22:02:48] #INFO     change_transaction_handlers.py:193 - handlers.change_transaction_handlers - Comment is changed.
-[2024-02-19 22:02:54] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 22:03:00] #INFO     transactions_handlers.py:252 - handlers.transactions_handlers - Request to change expense name was got. FSM was transformed to FSMChangeTransaction:change_expense_name state.
-[2024-02-19 22:03:22] #INFO     change_transaction_handlers.py:41 - handlers.change_transaction_handlers - Expense name is changed.
-[2024-02-19 22:03:28] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
-[2024-02-19 22:03:30] #INFO     transactions_handlers.py:262 - handlers.transactions_handlers - Request to change category was got. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 22:03:30] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
-[2024-02-19 22:03:32] #INFO     transactions_handlers.py:105 - handlers.transactions_handlers - Category was defined for new expense. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-19 22:03:37] #INFO     db_requests.py:124 - database.db_requests - Category ID for category Кафе for user with Telegram ID 474783927 was got from database.
-[2024-02-19 22:03:37] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Кофе в маке for user with Telegram ID 474783927 wasn't found.
-[2024-02-19 22:03:37] #INFO     db_requests.py:153 - database.db_requests - Expense Кофе в маке in category with ID 3 was added to database.
-[2024-02-19 22:03:37] #INFO     db_requests.py:283 - database.db_requests - Transaction for Кофе в маке from user with Telegram ID 474783927 was added to database.
-[2024-02-19 22:03:37] #INFO     transactions_handlers.py:154 - handlers.transactions_handlers - Transaction was confirmed and sent to database. FSM was transformed to FSMAddTransaction:fill_transaction state.
+[2024-02-20 11:28:16] #INFO     db_init.py:42 - database.db_init - Users table was exsisted or created.
+[2024-02-20 11:28:16] #INFO     db_init.py:54 - database.db_init - Categories table was exsisted or created.
+[2024-02-20 11:28:16] #INFO     db_init.py:66 - database.db_init - Expenses table was exsisted or created.
+[2024-02-20 11:28:16] #INFO     db_init.py:81 - database.db_init - Transaction table was exsisted or created.
+[2024-02-20 11:28:52] #INFO     command_handlers.py:25 - handlers.command_handlers - User Titov Nikita sent /start command.
+[2024-02-20 11:28:52] #INFO     db_requests.py:34 - database.db_requests - User with Telegram ID 474783927 was added to database.
+[2024-02-20 11:28:58] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
+[2024-02-20 11:29:03] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
+[2024-02-20 11:29:03] #INFO     transactions_handlers.py:47 - handlers.transactions_handlers - There is no expense Молоко in the database. FSM was transformed to FSMAddTransaction:add_new_expense state.
+[2024-02-20 11:29:03] #INFO     db_requests.py:235 - database.db_requests - Categories names for user with Telegram ID 474783927 wasn't found in database.
+[2024-02-20 11:29:06] #INFO     transactions_handlers.py:98 - handlers.transactions_handlers - Request to set new category was sent. FSM was transformed to FSMAddTransaction:add_new_category state.
+[2024-02-20 11:29:17] #INFO     transactions_handlers.py:207 - handlers.transactions_handlers - New category was defined for new expense. FSM was transformed to FSMAddTransaction:confirm_transaction state.
+[2024-02-20 11:29:26] #INFO     db_requests.py:63 - database.db_requests - Info for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:29:26] #INFO     db_requests.py:90 - database.db_requests - Category Продукты for user with Telegram ID 474783927 was added to database.
+[2024-02-20 11:29:26] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Молоко for user with Telegram ID 474783927 wasn't found.
+[2024-02-20 11:29:26] #INFO     db_requests.py:153 - database.db_requests - Expense Молоко in category with ID 1 was added to database.
+[2024-02-20 11:29:26] #INFO     db_requests.py:283 - database.db_requests - Transaction for Молоко from user with Telegram ID 474783927 was added to database.
+[2024-02-20 11:29:26] #INFO     transactions_handlers.py:154 - handlers.transactions_handlers - Transaction was confirmed and sent to database. FSM was transformed to FSMAddTransaction:fill_transaction state.
+[2024-02-20 11:29:34] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
+[2024-02-20 11:29:34] #INFO     transactions_handlers.py:47 - handlers.transactions_handlers - There is no expense Кофе in the database. FSM was transformed to FSMAddTransaction:add_new_expense state.
+[2024-02-20 11:29:34] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:29:37] #INFO     transactions_handlers.py:98 - handlers.transactions_handlers - Request to set new category was sent. FSM was transformed to FSMAddTransaction:add_new_category state.
+[2024-02-20 11:29:40] #INFO     transactions_handlers.py:207 - handlers.transactions_handlers - New category was defined for new expense. FSM was transformed to FSMAddTransaction:confirm_transaction state.
+[2024-02-20 11:30:53] #INFO     db_requests.py:63 - database.db_requests - Info for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:30:53] #INFO     db_requests.py:90 - database.db_requests - Category Кафе for user with Telegram ID 474783927 was added to database.
+[2024-02-20 11:30:53] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 wasn't found.
+[2024-02-20 11:30:53] #INFO     db_requests.py:153 - database.db_requests - Expense Кофе in category with ID 2 was added to database.
+[2024-02-20 11:30:53] #INFO     db_requests.py:283 - database.db_requests - Transaction for Кофе from user with Telegram ID 474783927 was added to database.
+[2024-02-20 11:30:53] #INFO     transactions_handlers.py:154 - handlers.transactions_handlers - Transaction was confirmed and sent to database. FSM was transformed to FSMAddTransaction:fill_transaction state.
+[2024-02-20 11:30:56] #INFO     command_handlers.py:42 - handlers.command_handlers - User Titov Nikita sent /cancel command from FSMAddTransaction:fill_transaction state.
+[2024-02-20 11:32:32] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
+[2024-02-20 11:32:38] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Хлеб for user with Telegram ID 474783927 wasn't found.
+[2024-02-20 11:32:38] #INFO     transactions_handlers.py:47 - handlers.transactions_handlers - There is no expense Хлеб in the database. FSM was transformed to FSMAddTransaction:add_new_expense state.
+[2024-02-20 11:32:38] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:32:39] #INFO     transactions_handlers.py:105 - handlers.transactions_handlers - Category was defined for new expense. FSM was transformed to FSMAddTransaction:add_new_expense state.
+[2024-02-20 11:32:44] #INFO     db_requests.py:124 - database.db_requests - Category ID for category Продукты for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:32:44] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense Хлеб for user with Telegram ID 474783927 wasn't found.
+[2024-02-20 11:32:44] #INFO     db_requests.py:153 - database.db_requests - Expense Хлеб in category with ID 1 was added to database.
+[2024-02-20 11:32:44] #INFO     db_requests.py:283 - database.db_requests - Transaction for Хлеб from user with Telegram ID 474783927 was added to database.
+[2024-02-20 11:32:44] #INFO     transactions_handlers.py:154 - handlers.transactions_handlers - Transaction was confirmed and sent to database. FSM was transformed to FSMAddTransaction:fill_transaction state.
+[2024-02-20 11:32:49] #INFO     db_requests.py:195 - database.db_requests - Expense info for expense Хлеб for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:32:49] #INFO     transactions_handlers.py:60 - handlers.transactions_handlers - There is expense Хлеб in the database. FSM was transformed to FSMAddTransaction:confirm_transaction state.
+[2024-02-20 11:32:51] #INFO     db_requests.py:124 - database.db_requests - Category ID for category Продукты for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:32:51] #INFO     db_requests.py:195 - database.db_requests - Expense info for expense Хлеб for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:32:51] #INFO     db_requests.py:283 - database.db_requests - Transaction for Хлеб from user with Telegram ID 474783927 was added to database.
+[2024-02-20 11:32:51] #INFO     transactions_handlers.py:154 - handlers.transactions_handlers - Transaction was confirmed and sent to database. FSM was transformed to FSMAddTransaction:fill_transaction state.
+[2024-02-20 11:32:57] #INFO     db_requests.py:195 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:32:57] #INFO     transactions_handlers.py:60 - handlers.transactions_handlers - There is expense Кофе in the database. FSM was transformed to FSMAddTransaction:confirm_transaction state.
+[2024-02-20 11:33:00] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
+[2024-02-20 11:33:02] #INFO     transactions_handlers.py:262 - handlers.transactions_handlers - Request to change category was got. FSM was transformed to FSMAddTransaction:add_new_expense state.
+[2024-02-20 11:33:02] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:33:04] #INFO     transactions_handlers.py:105 - handlers.transactions_handlers - Category was defined for new expense. FSM was transformed to FSMAddTransaction:add_new_expense state.
+[2024-02-20 11:33:06] #INFO     db_requests.py:124 - database.db_requests - Category ID for category Продукты for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:33:06] #INFO     db_requests.py:195 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:33:06] #INFO     db_requests.py:283 - database.db_requests - Transaction for Кофе from user with Telegram ID 474783927 was added to database.
+[2024-02-20 11:33:06] #INFO     transactions_handlers.py:154 - handlers.transactions_handlers - Transaction was confirmed and sent to database. FSM was transformed to FSMAddTransaction:fill_transaction state.
+[2024-02-20 11:39:04] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
+[2024-02-20 11:39:09] #INFO     db_requests.py:195 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:39:09] #INFO     transactions_handlers.py:60 - handlers.transactions_handlers - There is expense Кофе in the database. FSM was transformed to FSMAddTransaction:confirm_transaction state.
+[2024-02-20 11:39:17] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
+[2024-02-20 11:39:19] #INFO     transactions_handlers.py:262 - handlers.transactions_handlers - Request to change category was got. FSM was transformed to FSMAddTransaction:add_new_expense state.
+[2024-02-20 11:39:19] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:39:21] #INFO     transactions_handlers.py:105 - handlers.transactions_handlers - Category was defined for new expense. FSM was transformed to FSMAddTransaction:add_new_expense state.
+[2024-02-20 11:39:26] #INFO     db_requests.py:124 - database.db_requests - Category ID for category Продукты for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:39:26] #INFO     db_requests.py:195 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:39:26] #INFO     db_requests.py:153 - database.db_requests - Expense Кофе in category with ID 1 was added to database.
+[2024-02-20 11:39:26] #INFO     db_requests.py:283 - database.db_requests - Transaction for Кофе from user with Telegram ID 474783927 was added to database.
+[2024-02-20 11:39:26] #INFO     transactions_handlers.py:154 - handlers.transactions_handlers - Transaction was confirmed and sent to database. FSM was transformed to FSMAddTransaction:fill_transaction state.
+[2024-02-20 11:39:50] #INFO     db_requests.py:195 - database.db_requests - Expense info for expense Кофе for user with Telegram ID 474783927 was got from database.
+[2024-02-20 11:39:50] #INFO     transactions_handlers.py:60 - handlers.transactions_handlers - There is expense Кофе in the database. FSM was transformed to FSMAddTransaction:confirm_transaction state.
+[2024-02-20 11:39:53] #INFO     transactions_handlers.py:164 - handlers.transactions_handlers - Request to correct transaction was got. FSM was transformed to FSMAddTransaction:correct_transaction state.
+[2024-02-20 11:39:57] #INFO     transactions_handlers.py:262 - handlers.transactions_handlers - Request to change category was got. FSM was transformed to FSMAddTransaction:add_new_expense state.
+[2024-02-20 11:39:57] #INFO     db_requests.py:230 - database.db_requests - Categories names for user with Telegram ID 474783927 was got from database.

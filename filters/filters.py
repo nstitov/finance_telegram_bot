@@ -58,7 +58,7 @@ class IsCorrectAmountFilter(BaseFilter):
 class IsCorrectCreatedDateFilter(BaseFilter):
     async def __call__(self, message: Message) -> dict[Literal["created_date"] : date]:
         try:
-            year, month, day = message.text.split("-")
+            day, month, year = message.text.replace("-", ".").split(".")
             return {"created_date": date(int(year), int(month), int(day))}
         except:
             pass

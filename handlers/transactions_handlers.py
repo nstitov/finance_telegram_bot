@@ -29,7 +29,7 @@ async def process_correct_transaction(
     expense_name: str,
     cost: float,
 ):
-    created_date = date.today()
+    created_date = date.today().strftime("%d.%m.%Y")
     await state.update_data(
         expense_name=expense_name,
         cost=cost,

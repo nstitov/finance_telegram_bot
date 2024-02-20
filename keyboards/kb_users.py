@@ -48,7 +48,7 @@ def create_confirm_transaction_keyboard(
         KeyboardButton(text=cancel_text),
         width=1,
     )
-    return confirm_keyboard.as_markup()
+    return confirm_keyboard.as_markup(resize_keyboard=True, one_time_keyboard=True)
 
 
 def create_correct_transaction_keyboard(
@@ -69,4 +69,4 @@ def create_correct_transaction_keyboard(
         KeyboardButton(text=change_comment_button_text),
         width=2,
     )
-    return correct_keyboard.as_markup()
+    return correct_keyboard.as_markup(resize_keyboard=True, one_time_keyboard=True)

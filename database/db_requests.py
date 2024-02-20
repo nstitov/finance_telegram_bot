@@ -243,7 +243,7 @@ def add_transaction_to_db(
     expense_name: str,
     category_name: str,
     cost: float,
-    created_date: date,
+    created_date: str,
     amount: int,
     comment: str,
 ) -> None:
@@ -266,7 +266,7 @@ def add_transaction_to_db(
     if not category_id:
         category_id = add_category_to_db(telegram_id, category_name)
     expense_info = get_expense_info_from_db(telegram_id, expense_name)
-    if not expense_info:
+    if not expense_info or expense_info["category_name"] != category_name:
         expense_id = add_expense_to_db(expense_name, category_id)
     else:
         expense_id = expense_info["expense_id"]
@@ -278,7 +278,7 @@ def add_transaction_to_db(
             (expense_id, cost, created_date, amount, comment) VALUES
             (?, ?, ?, ?, ?)
             """,
-            (expense_id, cost, created_date.isoformat(), amount, comment),
+            (expense_id, cost, created_date, amount, comment),
         )
         logger.info(
             f"Transaction for {expense_name} from user with Telegram ID {telegram_id} "

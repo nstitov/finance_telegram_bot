@@ -152,7 +152,7 @@ async def process_change_incorrect_amount_transaction(
 async def process_change_created_date_transaction(
     message: Message, i18n: dict[str, str], created_date: date, state: FSMContext
 ):
-    await state.update_data(created_date=created_date)
+    await state.update_data(created_date=created_date.strftime("%d.%m.%Y"))
     logger.info("Created date is changed.")
     transaction_data = await state.get_data()
     await state.set_state(FSMAddTransaction.confirm_transaction)
