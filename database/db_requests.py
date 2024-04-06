@@ -177,11 +177,11 @@ def get_expense_info_from_db(
     with sqlite3.connect(DATABASE_NAME) as connection:
         cursor = connection.cursor()
         cursor.execute(
-            """SELECT expense_id, category_name
-            FROM
-            Expenses
-            INNER JOIN Categories ON Expenses.category_id = Categories.category_id
-            INNER JOIN Users ON Categories.user_id = Users.user_id
+            """
+            SELECT expense_id, category_name
+            FROM Expenses
+                INNER JOIN Categories ON Expenses.category_id = Categories.category_id
+                INNER JOIN Users ON Categories.user_id = Users.user_id
             WHERE expense_name=? AND telegram_id=?
             ORDER BY expense_id
             """,
@@ -192,15 +192,9 @@ def get_expense_info_from_db(
             expense_info_dict = {}
             expense_info_dict["expense_id"] = expense_info[0]
             expense_info_dict["category_name"] = expense_info[1]
-            logger.info(
-                f"Expense info for expense {expense_name} for user with Telegram ID "
-                f"{telegram_id} was got from database."
-            )
+            logger.info(f"Expense info {expense_name} for user {telegram_id} was got.")
             return expense_info_dict
-        logger.info(
-            f"Expense info for expense {expense_name} for user with Telegram ID "
-            f"{telegram_id} wasn't found."
-        )
+        logger.info(f"Expense info {expense_name} for user {telegram_id} wasn't found.")
 
 
 def get_all_user_categories(telegram_id: int) -> Optional[list[str]]:
@@ -218,8 +212,7 @@ def get_all_user_categories(telegram_id: int) -> Optional[list[str]]:
         cursor.execute(
             """
             SELECT category_name
-            FROM Categories
-            INNER JOIN Users ON Categories.user_id = Users.user_id
+            FROM Categories INNER JOIN Users ON Categories.user_id = Users.user_id
             WHERE telegram_id=?
             """,
             (telegram_id,),
@@ -227,15 +220,9 @@ def get_all_user_categories(telegram_id: int) -> Optional[list[str]]:
         categories = [category[0] for category in cursor.fetchall()]
 
         if categories:
-            logger.info(
-                f"Categories names for user with Telegram ID {telegram_id} was got "
-                f"from database."
-            )
+            logger.info(f"Category names for user {telegram_id} was got from db.")
             return categories
-        logger.info(
-            f"Categories names for user with Telegram ID {telegram_id} wasn't found "
-            f"in database."
-        )
+        logger.info(f"Category names for user {telegram_id} wasn't found in db.")
 
 
 def add_transaction_to_db(
@@ -280,7 +267,4 @@ def add_transaction_to_db(
             """,
             (expense_id, cost, created_date, amount, comment),
         )
-        logger.info(
-            f"Transaction for {expense_name} from user with Telegram ID {telegram_id} "
-            f"was added to database."
-        )
+        logger.info(f"Transaction for user {telegram_id} was added to db.")

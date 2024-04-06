@@ -38,7 +38,7 @@ async def process_change_expense_name_transaction(
     message: Message, i18n: dict[str, str], expense_name: str, state: FSMContext
 ):
     await state.update_data(expense_name=expense_name)
-    logger.info("Expense name is changed.")
+    logger.debug("Expense name is corrected.")
     transaction_data = await state.get_data()
     await state.set_state(FSMAddTransaction.confirm_transaction)
     await message.answer(
@@ -66,7 +66,7 @@ async def process_change_expense_name_transaction(
 async def process_change_incorrect_expense_name_transaction(
     message: Message, i18n: dict[str, str]
 ):
-    logger.info("Expense name for changing is incorrect.")
+    logger.debug("Expense name has incorrect format.")
     await message.answer(text=i18n["transaction_incorrect_expense_name"])
 
 
@@ -75,7 +75,7 @@ async def process_change_cost_transaction(
     message: Message, i18n: dict[str, str], cost: float, state: FSMContext
 ):
     await state.update_data(cost=cost)
-    logger.info("Cost is changed.")
+    logger.debug("Cost is corrected.")
     transaction_data = await state.get_data()
     await state.set_state(FSMAddTransaction.confirm_transaction)
     await message.answer(
@@ -103,7 +103,7 @@ async def process_change_cost_transaction(
 async def process_change_incorrect_cost_transaction(
     message: Message, i18n: dict[str, str]
 ):
-    logger.info("Cost for changing is incorrect.")
+    logger.debug("Cost has incorrect format.")
     await message.answer(text=i18n["transaction_incorrect_cost"])
 
 
@@ -114,7 +114,7 @@ async def process_change_amount_transaction(
     message: Message, i18n: dict[str, str], amount: int, state: FSMContext
 ):
     await state.update_data(amount=amount)
-    logger.info("Amount is changed.")
+    logger.debug("Amount is corrected.")
     transaction_data = await state.get_data()
     await state.set_state(FSMAddTransaction.confirm_transaction)
     await message.answer(
@@ -142,7 +142,7 @@ async def process_change_amount_transaction(
 async def process_change_incorrect_amount_transaction(
     message: Message, i18n: dict[str, str]
 ):
-    logger.info("Amount for changing is incorrect.")
+    logger.debug("Amount has incorrect format.")
     await message.answer(text=i18n["transaction_incorrect_amount"])
 
 
@@ -153,7 +153,7 @@ async def process_change_created_date_transaction(
     message: Message, i18n: dict[str, str], created_date: date, state: FSMContext
 ):
     await state.update_data(created_date=created_date.strftime("%d.%m.%Y"))
-    logger.info("Created date is changed.")
+    logger.debug("Created date is corrected.")
     transaction_data = await state.get_data()
     await state.set_state(FSMAddTransaction.confirm_transaction)
     await message.answer(
@@ -181,7 +181,7 @@ async def process_change_created_date_transaction(
 async def process_change_incorrect_created_date_transaction(
     message: Message, i18n: dict[str, str]
 ):
-    logger.info("Created date for changing is incorrect.")
+    logger.debug("Created date has incorrect format.")
     await message.answer(text=i18n["transaction_incorrect_created_date"])
 
 
@@ -190,7 +190,7 @@ async def process_change_comment_transaction(
     message: Message, i18n: dict[str, str], comment: str, state: FSMContext
 ):
     await state.update_data(comment=comment)
-    logger.info("Comment is changed.")
+    logger.debug("Comment is corrected.")
     transaction_data = await state.get_data()
     await state.set_state(FSMAddTransaction.confirm_transaction)
     await message.answer(
@@ -218,5 +218,5 @@ async def process_change_comment_transaction(
 async def process_change_incorrect_comment_transaction(
     message: Message, i18n: dict[str, str]
 ):
-    logger.info("Comment for changing is incorrect.")
+    logger.info("Comment has incorrect format.")
     await message.answer(text=i18n["transaction_incorrect_comment"])

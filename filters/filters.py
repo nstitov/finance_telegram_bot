@@ -3,7 +3,7 @@ from datetime import date
 from typing import Literal
 
 from aiogram.filters import BaseFilter
-from aiogram.types import CallbackQuery, Message
+from aiogram.types import Message
 
 
 class IsCorrectTransaction(BaseFilter):
