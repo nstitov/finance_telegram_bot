@@ -1,20 +1,24 @@
-[2024-02-24 15:35:05] #INFO     command_handlers.py:25 - handlers.command_handlers - User ������ sent /start command.
-[2024-02-24 15:35:05] #INFO     db_requests.py:34 - database.db_requests - User with Telegram ID 847991295 was added to database.
-[2024-02-24 15:35:12] #INFO     command_handlers.py:25 - handlers.command_handlers - User ������ sent /start command.
-[2024-02-24 15:35:12] #INFO     db_requests.py:34 - database.db_requests - User with Telegram ID 847991295 was added to database.
-[2024-02-24 15:35:23] #INFO     command_handlers.py:54 - handlers.command_handlers - User ������ was moved to transaction adding mode.
-[2024-02-24 23:06:37] #INFO     command_handlers.py:25 - handlers.command_handlers - User Alena sent /start command.
-[2024-02-24 23:06:37] #INFO     db_requests.py:34 - database.db_requests - User with Telegram ID 583144372 was added to database.
-[2024-02-24 23:06:37] #INFO     command_handlers.py:25 - handlers.command_handlers - User Alena sent /start command.
-[2024-02-24 23:06:37] #INFO     db_requests.py:34 - database.db_requests - User with Telegram ID 583144372 was added to database.
-[2024-02-24 23:06:37] #INFO     command_handlers.py:25 - handlers.command_handlers - User Alena sent /start command.
-[2024-02-24 23:06:37] #INFO     db_requests.py:34 - database.db_requests - User with Telegram ID 583144372 was added to database.
-[2024-02-24 23:07:00] #INFO     command_handlers.py:54 - handlers.command_handlers - User Alena was moved to transaction adding mode.
-[2024-02-24 23:07:18] #INFO     db_requests.py:200 - database.db_requests - Expense info for expense ������� for user with Telegram ID 583144372 wasn't found.
-[2024-02-24 23:07:18] #INFO     transactions_handlers.py:47 - handlers.transactions_handlers - There is no expense ������� in the database. FSM was transformed to FSMAddTransaction:add_new_expense state.
-[2024-02-24 23:07:18] #INFO     db_requests.py:235 - database.db_requests - Categories names for user with Telegram ID 583144372 wasn't found in database.
-[2024-02-24 23:08:00] #INFO     transactions_handlers.py:98 - handlers.transactions_handlers - Request to set new category was sent. FSM was transformed to FSMAddTransaction:add_new_category state.
-[2024-02-24 23:08:16] #INFO     transactions_handlers.py:207 - handlers.transactions_handlers - New category was defined for new expense. FSM was transformed to FSMAddTransaction:confirm_transaction state.
-[2024-02-24 23:08:42] #INFO     transactions_handlers.py:190 - handlers.transactions_handlers - Instead of confirm/cancel/correct transaction was sent something else.
-[2024-02-24 23:08:56] #INFO     transactions_handlers.py:190 - handlers.transactions_handlers - Instead of confirm/cancel/correct transaction was sent something else.
-[2024-02-24 23:09:58] #INFO     command_handlers.py:42 - handlers.command_handlers - User Alena sent /cancel command from FSMAddTransaction:confirm_transaction state.
+[2024-04-17 19:19:48] #INFO     command_handlers.py:25 - handlers.command_handlers - User Titov Nikita sent /start command.
+[2024-04-17 19:19:48] #INFO     db_requests.py:34 - database.db_requests - User with Telegram ID 474783927 was added to database.
+[2024-04-17 19:19:53] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
+[2024-04-17 19:19:58] #INFO     db_requests.py:195 - database.db_requests - Expense info Молоко for user 474783927 was got.
+[2024-04-17 19:20:17] #INFO     db_requests.py:124 - database.db_requests - Category ID for category Продукты for user with Telegram ID 474783927 was got from database.
+[2024-04-17 19:20:17] #INFO     db_requests.py:195 - database.db_requests - Expense info Молоко for user 474783927 was got.
+[2024-04-17 19:20:17] #INFO     db_requests.py:270 - database.db_requests - Transaction for user 474783927 was added to db.
+[2024-04-17 19:20:25] #INFO     db_requests.py:197 - database.db_requests - Expense info Колеса for user 474783927 wasn't found.
+[2024-04-17 19:20:25] #INFO     db_requests.py:223 - database.db_requests - Category names for user 474783927 was got from db.
+[2024-04-17 19:20:39] #INFO     db_requests.py:63 - database.db_requests - Info for user with Telegram ID 474783927 was got from database.
+[2024-04-17 19:20:39] #INFO     db_requests.py:90 - database.db_requests - Category Машина for user with Telegram ID 474783927 was added to database.
+[2024-04-17 19:20:39] #INFO     db_requests.py:197 - database.db_requests - Expense info Колеса for user 474783927 wasn't found.
+[2024-04-17 19:20:39] #INFO     db_requests.py:153 - database.db_requests - Expense Колеса in category with ID 3 was added to database.
+[2024-04-17 19:20:39] #INFO     db_requests.py:270 - database.db_requests - Transaction for user 474783927 was added to db.
+[2024-04-17 19:20:56] #INFO     db_requests.py:197 - database.db_requests - Expense info Крем 1000 for user 474783927 wasn't found.
+[2024-04-17 19:20:56] #INFO     db_requests.py:223 - database.db_requests - Category names for user 474783927 was got from db.
+[2024-04-17 19:21:39] #INFO     db_requests.py:63 - database.db_requests - Info for user with Telegram ID 474783927 was got from database.
+[2024-04-17 19:21:39] #INFO     db_requests.py:90 - database.db_requests - Category Лекарства for user with Telegram ID 474783927 was added to database.
+[2024-04-17 19:21:39] #INFO     db_requests.py:197 - database.db_requests - Expense info Крем for user 474783927 wasn't found.
+[2024-04-17 19:21:39] #INFO     db_requests.py:153 - database.db_requests - Expense Крем in category with ID 4 was added to database.
+[2024-04-17 19:21:39] #INFO     db_requests.py:270 - database.db_requests - Transaction for user 474783927 was added to db.
+[2024-04-17 19:21:41] #INFO     command_handlers.py:42 - handlers.command_handlers - User Titov Nikita sent /cancel command from FSMAddTransaction:fill_transaction state.
+[2024-04-17 19:22:02] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
+[2024-04-17 19:22:44] #INFO     command_handlers.py:42 - handlers.command_handlers - User Titov Nikita sent /cancel command from FSMAddTransaction:fill_transaction state.
