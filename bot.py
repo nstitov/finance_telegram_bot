@@ -7,11 +7,13 @@ import yaml
 from aiogram import Bot, Dispatcher, F
 from aiogram.fsm.storage.memory import MemoryStorage
 
-if not os.path.exists("Logs"):
-    os.makedirs("Logs")
+if not os.path.exists(os.path.join(os.path.dirname(__file__), "Logs")):
+    os.makedirs(os.path.join(os.path.dirname(__file__), "Logs"))
 
 if __name__ == "__main__":
-    with open("config_data/logging_config.yaml", "rt") as f:
+    with open(
+        os.path.join(os.path.dirname(__file__), "config_data/logging_config.yaml"), "rt"
+    ) as f:
         logging_config = yaml.safe_load(f.read())
     logging.config.dictConfig(logging_config)
 
