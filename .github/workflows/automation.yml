@@ -6,7 +6,7 @@ name: "automate-all-the-things"
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
 
 # Задачи, которые будут выполняться в рамках флоу
 jobs:
@@ -29,3 +29,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
+          # С каким тегом будет загружен образ
+          # Переменные тоже поддерживаются
+          tags: groosha/test-docker-push:latest
