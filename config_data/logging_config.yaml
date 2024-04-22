@@ -28,15 +28,14 @@ handlers:
     stream: "ext://sys.stderr"
 
   info_file_handler:
-      # class: config_data.logging_services.LogRotatiingFileHandler
-      class: logging.StreamHandler
+      class: config_data.logging_services.LogRotatiingFileHandler
       formatter: default_formatter
       level: INFO
-      # filename: Logs/info.log
-      # when: midnight
-      # utc: False
-      # backupCount: 30
-      # filters: [info_filter]
+      filename: Logs/info.log
+      when: midnight
+      utc: False
+      backupCount: 30
+      filters: [info_filter]
 
   error_file_handler:
       class: logging.FileHandler
