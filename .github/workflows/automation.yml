@@ -31,4 +31,4 @@ jobs:
           push: true
           # С каким тегом будет загружен образ
           # Переменные тоже поддерживаются
-          tags: groosha/test-docker-push:latest
+          tags: nstitov/test-docker-push:latest
