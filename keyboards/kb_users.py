@@ -6,7 +6,7 @@ from aiogram.types import (
 )
 from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
 
-from database.db_requests import get_all_user_categories
+from database.db_requests1 import get_all_user_categories
 from keyboards.cbdata import CategoriesCallbackFactory
 
 

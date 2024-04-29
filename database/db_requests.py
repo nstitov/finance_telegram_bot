@@ -1,44 +1,38 @@
 import logging
-import sqlite3
-from datetime import date, datetime
-from typing import Literal, Optional
+from datetime import datetime
+from typing import Optional
 
-from config_data.config import DATABASE_NAME
+from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError, NoResultFound
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
+
+from database.db_models import Category, Expense, Transaction, User
 
 logger = logging.getLogger(__name__)
 
 
-def add_user_to_db(telegram_id: int, user_name: str) -> None:
+async def add_user(
+    async_session: async_sessionmaker[AsyncSession], telegram_id: int, user_name: str
+) -> None:
     """
     Add user information to database.
 
     Args:
         telegram_id (int): user Telegram ID
         user_name (str): user Telegram name
-
-    Returns:
     """
-    with sqlite3.connect(DATABASE_NAME) as connection:
-        cursor = connection.cursor()
-        cursor.execute(
-            """
-            INSERT OR IGNORE INTO Users
-            (telegram_id, user_name, reg_date) VALUES (?, ?, ?)
-            """,
-            (
-                telegram_id,
-                user_name,
-                datetime.utcnow().replace(microsecond=0).isoformat(),
-            ),
-        )
-        logger.info(f"User with Telegram ID {telegram_id} was added to database.")
+    try:
+        async with async_session() as session:
+            async with session.begin():
+                session.add(User(telegram_id=telegram_id, user_name=user_name))
+                logger.info(f"User {telegram_id} was added to db.")
+    except IntegrityError:
+        logger.warning(f"Attempt to add an existing user: {telegram_id}.")
 
 
-def get_user_info_from_db(
-    telegram_id: int,
-) -> Optional[
-    dict[Literal["user_id", "telegram_id", "user_name", "reg_date"], int | str]
-]:
+async def get_user_info(
+    async_session: async_sessionmaker[AsyncSession], telegram_id: int
+) -> User:
     """
     Get user information from database.
 
@@ -46,30 +40,24 @@ def get_user_info_from_db(
         telegram_id (int): user Telegram ID
 
     Returns:
-        dict[str, int | str]: dict with user information: user_id - user ID in database,
-            telegram_id - Telegram ID, user_name - Telegram username and reg_date - date
-            of user start bot if user was found in database, else None
+        Users: instance of User table class with information of required user
     """
-    with sqlite3.connect(DATABASE_NAME) as connection:
-        cursor = connection.cursor()
-        cursor.execute("SELECT * FROM Users WHERE telegram_id=?", (telegram_id,))
-        user_info = cursor.fetchone()
-        if user_info:
-            user_info_dct = {}
-            user_info_dct["user_id"] = user_info[0]
-            user_info_dct["telegram_id"] = user_info[1]
-            user_info_dct["user_name"] = user_info[2]
-            user_info_dct["reg_date"] = user_info[3]
-            logger.info(
-                f"Info for user with Telegram ID {telegram_id} was got from database."
-            )
-            return user_info_dct
-        logger.warning(
-            f"Info for user with Telegram ID {telegram_id} wasn't found in database."
-        )
+    async with async_session() as session:
+        req = select(User).where(User.telegram_id == telegram_id)
+        result = await session.execute(req)
+        try:
+            user_info = result.scalar_one()
+            logger.info(f"Info for user {telegram_id} was got from db.")
+            return user_info
+        except NoResultFound:
+            logger.warning(f"Info for user {telegram_id} wasn't found in db.")
 
 
-def add_category_to_db(telegram_id: int, category_name: str) -> int:
+async def add_category(
+    async_session: async_sessionmaker[AsyncSession],
+    telegram_id: int,
+    category_name: str,
+) -> int:
     """
     Add new category to database.
 
@@ -80,24 +68,31 @@ def add_category_to_db(telegram_id: int, category_name: str) -> int:
     Returns:
         int: category ID in database
     """
-    user_info = get_user_info_from_db(telegram_id)
-    with sqlite3.connect(DATABASE_NAME) as connection:
-        cursor = connection.cursor()
-        cursor.execute(
-            "INSERT INTO Categories (user_id, category_name) VALUES (?, ?)",
-            (user_info["user_id"], category_name),
-        )
-        logger.info(
-            f"Category {category_name} for user with Telegram ID {telegram_id} was "
-            f"added to database."
-        )
-        cursor.execute(
-            "SELECT category_id FROM Categories ORDER BY category_id DESC LIMIT 1"
-        )
-        return cursor.fetchone()[0]
+    async with async_session() as session:
+        user_info = await get_user_info(session, telegram_id)
+
+        async with session.begin():
+            session.add(
+                Category(category_name=category_name, user_id=user_info.user_id)
+            )
+            logger.info(
+                f"Category {category_name} for user {telegram_id} was added to db."
+            )
+
+        req = select(Category).order_by(Category.category_id.desc()).limit(1)
+        result = await session.execute(req)
+        try:
+            category_info = result.scalar_one()
+            return category_info.category_id
+        except NoResultFound:
+            logger.warning(f"Category {category_name} wasn't found in db.")
 
 
-def get_category_id_from_db(telegram_id: int, category_name: str) -> Optional[int]:
+async def get_category_info(
+    async_session: async_sessionmaker[AsyncSession],
+    telegram_id: int,
+    category_name: str,
+) -> Optional[Category]:
     """
     Get category ID from database.
 
@@ -106,34 +101,29 @@ def get_category_id_from_db(telegram_id: int, category_name: str) -> Optional[in
         category_name (str): name of category
 
     Returns:
-        int: category ID in database if category was found in database, else None
+        Category: instance of Category table class with required category info
     """
-    with sqlite3.connect(DATABASE_NAME) as connection:
-        cursor = connection.cursor()
-        cursor.execute(
-            """
-            SELECT category_id
-            FROM Categories
-            INNER JOIN Users ON Categories.user_id = Users.user_id
-            WHERE telegram_id=? AND category_name=?
-            """,
-            (telegram_id, category_name),
+    async with async_session() as session:
+        req = (
+            select(Category)
+            .join(Category.user_id)
+            .where(User.telegram_id == telegram_id)
+            .where(Category.category_name == category_name)
         )
-        category_id = cursor.fetchone()
-        if category_id:
-            logger.info(
-                f"Category ID for category {category_name} for user with Telegram ID "
-                f"{telegram_id} was got from database."
-            )
-            return category_id[0]
-
-        logger.warning(
-            f"Category ID for category {category_name} and telegram user with Telegram "
-            f"ID {telegram_id} wasn't found in database."
-        )
+        result = await session.execute(req)
+        try:
+            category_info = result.scalar_one()
+            logger.info(f"Info for category {category_name} was got from db.")
+            return category_info
+        except NoResultFound:
+            logger.warning(f"Info for category {category_name} wasn't found in db.")
 
 
-def add_expense_to_db(expense_name: str, category_id: int) -> int:
+async def add_expense(
+    async_session: async_sessionmaker[AsyncSession],
+    expense_name: str,
+    category_id: int,
+) -> int:
     """
     Add new expense to database.
 
@@ -144,25 +134,23 @@ def add_expense_to_db(expense_name: str, category_id: int) -> int:
     Returns:
         int: new expense ID in database
     """
-    with sqlite3.connect(DATABASE_NAME) as connection:
-        cursor = connection.cursor()
-        cursor.execute(
-            "INSERT INTO Expenses (expense_name, category_id) VALUES (?, ?)",
-            (expense_name, category_id),
-        )
-        logger.info(
-            f"Expense {expense_name} in category with ID {category_id} was added to "
-            f"database."
-        )
-        cursor.execute(
-            "SELECT expense_id FROM Expenses ORDER BY expense_id DESC LIMIT 1"
-        )
-        return cursor.fetchone()[0]
+    async with async_session() as session:
+        async with session.begin():
+            session.add(Expense(expense_name=expense_name, category_id=category_id))
+            logger.info(f"Expense {expense_name} was added to db.")
+
+        req = select(Expense).order_by(Expense.category_id.desc()).limit(1)
+        result = await session.execute(req)
+        try:
+            expense_info = result.scalar_one()
+            return expense_info.expense_id
+        except NoResultFound:
+            logger.warning(f"Expense {expense_name} wasn't found in db.")
 
 
-def get_expense_info_from_db(
-    telegram_id: int, expense_name: str
-) -> Optional[dict[Literal["expense_id", "category_name"], str | int]]:
+async def get_expense_info(
+    async_session: async_sessionmaker[AsyncSession], telegram_id: int, expense_name: str
+) -> Optional[Expense]:
     """
     Get expense information from database.
 
@@ -171,33 +159,29 @@ def get_expense_info_from_db(
         expense_name (str): name of expense
 
     Returns:
-        dict[str, str | int]: dict with expense information: expense_id - expense ID in
-            database, category_name - name of expense category
+        Expense: instance of Expense table class with required expense info
     """
-    with sqlite3.connect(DATABASE_NAME) as connection:
-        cursor = connection.cursor()
-        cursor.execute(
-            """
-            SELECT expense_id, category_name
-            FROM Expenses
-                INNER JOIN Categories ON Expenses.category_id = Categories.category_id
-                INNER JOIN Users ON Categories.user_id = Users.user_id
-            WHERE expense_name=? AND telegram_id=?
-            ORDER BY expense_id
-            """,
-            (expense_name, telegram_id),
+    async with async_session() as session:
+        req = (
+            select(Expense)
+            .join(Expense.category_id)
+            .join(Category.user_id)
+            .where(Expense.expense_name == expense_name)
+            .where(User.telegram_id == telegram_id)
+            .order_by(Expense.expense_id)
         )
-        expense_info = cursor.fetchone()
-        if expense_info:
-            expense_info_dict = {}
-            expense_info_dict["expense_id"] = expense_info[0]
-            expense_info_dict["category_name"] = expense_info[1]
-            logger.info(f"Expense info {expense_name} for user {telegram_id} was got.")
-            return expense_info_dict
-        logger.info(f"Expense info {expense_name} for user {telegram_id} wasn't found.")
+        result = await session.execute(req)
+        try:
+            expense_info = result.scalar_one()
+            logger.info(f"Info for expense {expense_name} was got from db.")
+            return expense_info
+        except NoResultFound:
+            logger.warning(f"Info for expense {expense_name} wasn't found in db.")
 
 
-def get_all_user_categories(telegram_id: int) -> Optional[list[str]]:
+async def get_all_user_categories(
+    async_session: async_sessionmaker[AsyncSession], telegram_id: int
+) -> Optional[list[str]]:
     """
     Get all categories names for required user from database.
 
@@ -207,30 +191,33 @@ def get_all_user_categories(telegram_id: int) -> Optional[list[str]]:
     Returns:
         list[str]: list of categories names for required user if existed else None
     """
-    with sqlite3.connect(DATABASE_NAME) as connection:
-        cursor = connection.cursor()
-        cursor.execute(
-            """
-            SELECT category_name
-            FROM Categories INNER JOIN Users ON Categories.user_id = Users.user_id
-            WHERE telegram_id=?
-            """,
-            (telegram_id,),
+    async with async_session() as session:
+        req = (
+            select(Category)
+            .join(Category.user_id)
+            .where(User.telegram_id == telegram_id)
         )
-        categories = [category[0] for category in cursor.fetchall()]
+        result = await session.execute(req)
 
-        if categories:
-            logger.info(f"Category names for user {telegram_id} was got from db.")
-            return categories
-        logger.info(f"Category names for user {telegram_id} wasn't found in db.")
+        categories_lst = []
+        try:
+            for category_info in result.scalars().all():
+                categories_lst.append(category_info.category_name)
+            logger.info(
+                f"{len(categories_lst)} categories for user {telegram_id} were found "
+                f"in db."
+            )
+        except NoResultFound:
+            logger.info(f"Noone category for user {telegram_id} wasn't found ib db.")
 
 
-def add_transaction_to_db(
+async def add_transaction(
+    async_session: async_sessionmaker[AsyncSession],
     telegram_id: int,
     expense_name: str,
     category_name: str,
-    cost: float,
-    created_date: str,
+    cost: float | int,
+    created_date: datetime,
     amount: int,
     comment: str,
 ) -> None:
@@ -246,25 +233,27 @@ def add_transaction_to_db(
         created_date (date): date of expense
         amount (int): amount of expense
         comment (str): comment for expense
-
-    Returns:
     """
-    category_id = get_category_id_from_db(telegram_id, category_name)
-    if not category_id:
-        category_id = add_category_to_db(telegram_id, category_name)
-    expense_info = get_expense_info_from_db(telegram_id, expense_name)
-    if not expense_info or expense_info["category_name"] != category_name:
-        expense_id = add_expense_to_db(expense_name, category_id)
+    category_info = await get_category_info(async_session, telegram_id, category_name)
+    if category_info:
+        category_id = category_info.category_id
     else:
-        expense_id = expense_info["expense_id"]
-    with sqlite3.connect(DATABASE_NAME) as connection:
-        cursor = connection.cursor()
-        cursor.execute(
-            """
-            INSERT INTO Transactions
-            (expense_id, cost, created_date, amount, comment) VALUES
-            (?, ?, ?, ?, ?)
-            """,
-            (expense_id, cost, created_date, amount, comment),
-        )
-        logger.info(f"Transaction for user {telegram_id} was added to db.")
+        category_id = await add_category(async_session, telegram_id, category_name)
+    expense_info = await get_expense_info(async_session, telegram_id, expense_name)
+    if not expense_info or expense_info.category_id != category_id:
+        expense_id = await add_expense(async_session, expense_name, category_id)
+    else:
+        expense_id = expense_info.expense_id
+
+    async with async_session() as session:
+        async with session.begin():
+            session.add(
+                Transaction(
+                    expense_id=expense_id,
+                    cost=cost,
+                    created_date=created_date,
+                    amount=amount,
+                    comment=comment,
+                )
+            )
+            logger.info(f"Transaction for user {telegram_id} was added to db.")

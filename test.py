@@ -2,8 +2,8 @@ import asyncio
 
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
-from database.models import Base
-from database.requests import add_category, add_user, get_user_info
+from database.db_models import Base
+from database.db_requests import add_category, add_user, get_user_info
 
 
 async def main():
