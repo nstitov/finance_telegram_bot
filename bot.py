@@ -4,6 +4,7 @@ import logging
 from aiogram import Bot, Dispatcher, F
 from aiogram.client.bot import DefaultBotProperties
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.fsm.storage.redis import RedisStorage
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
 from config_data.config import config
@@ -14,7 +15,7 @@ from handlers.ignore_handlers import router as ignore_router
 from handlers.transactions_handlers import router as transactions_router
 from keyboards.set_menu import set_main_menu
 from lexicon.lexicon import translations
-from middlewares.outer_middlewares import TranslatorMiddleware
+from middlewares.outer_middlewares import DbSessionMiddleware, TranslatorMiddleware
 
 logger = logging.getLogger("bot")
 
@@ -30,10 +31,20 @@ async def main():
         default=DefaultBotProperties(parse_mode="HTML"),
     )
 
-    dp = Dispatcher(storage=MemoryStorage(), _translations=translations)
+    if config.tg_bot.storage == "redis":
+        dp = Dispatcher(
+            storage=RedisStorage.from_url(config.redis.redis_dsn),
+            _translations=translations,
+        )
+    else:
+        dp = Dispatcher(storage=MemoryStorage(), _translations=translations)
+
     dp.message.filter(F.chat.type == "private")
+
     dp.message.outer_middleware(TranslatorMiddleware())
+    dp.message.outer_middleware(DbSessionMiddleware(db_pool))
     dp.callback_query.outer_middleware(TranslatorMiddleware())
+    dp.callback_query.outer_middleware(DbSessionMiddleware(db_pool))
 
     dp.include_router(default_commands_router)
     dp.include_router(transactions_router)
