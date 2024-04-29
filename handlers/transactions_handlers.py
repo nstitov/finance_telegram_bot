@@ -5,6 +5,7 @@ from aiogram import F, Router
 from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message, ReplyKeyboardRemove
+from sqlalchemy.ext.asyncio import AsyncSession
 
 import database.db_requests as db
 from filters.filters import IsCorrectCategoryName, IsCorrectTransaction
@@ -26,10 +27,11 @@ async def process_correct_transaction(
     message: Message,
     i18n: dict[str, str],
     state: FSMContext,
+    async_session: AsyncSession,
     expense_name: str,
     cost: float,
 ):
-    created_date = date.today().strftime("%d.%m.%Y")
+    created_date = date.today()
     await state.update_data(
         expense_name=expense_name,
         cost=cost,
@@ -38,34 +40,41 @@ async def process_correct_transaction(
         comment=None,
     )
 
-    expense_info = get_expense_info_from_db(
+    expense_category_name = await db.get_expense_category_name(
+        async_session,
         message.from_user.id,
         expense_name,
     )
-    if not expense_info:
+    if not expense_category_name:
         await state.set_state(FSMAddTransaction.add_new_expense)
-        logger.debug(
-            f"Expense {expense_name} isn't in db. New FSM state is {await state.get_state()}."
+        logger.info(
+            f"Expense {expense_name} wasn't in db. New FSM state is "
+            f"{await state.get_state()}."
+        )
+        user_categories = await db.get_all_user_categories(
+            async_session, message.from_user.id
         )
         await message.answer(
             text=i18n["transaction_no_expense"],
             reply_markup=create_categories_keyboard(
-                message.from_user.id, i18n["transaction_add_new_category_callback"]
+                user_categories,
+                i18n["transaction_add_new_category_callback"],
             ),
         )
     else:
-        await state.update_data(category_name=expense_info["category_name"])
+        await state.update_data(category_name=expense_category_name)
         await state.set_state(FSMAddTransaction.confirm_transaction)
-        logger.debug(
-            f"Expense {expense_name} is in the db. New FSM state is {await state.get_state()}."
+        logger.info(
+            f"Expense {expense_name} was found in db. New FSM state is "
+            f"{await state.get_state()}."
         )
         await message.answer(
             text=i18n["transaction_info"].format(
                 expense_name=expense_name,
-                category_name=expense_info["category_name"],
+                category_name=expense_category_name,
                 cost=cost,
                 amount=1,
-                created_date=created_date,
+                created_date=created_date.strftime("%d.%m.%Y"),
                 comment=i18n["transaction_without_comment"],
             ),
             reply_markup=create_confirm_transaction_keyboard(
@@ -93,26 +102,25 @@ async def process_add_expense(
     category_name = callback.data.split(":")[-1]
     if category_name == i18n["transaction_add_new_category_callback"]:
         await state.set_state(FSMAddTransaction.add_new_category)
-        logger.debug(
-            f"Adding new category. New FSM state is {await state.get_state()}."
-        )
+        logger.info(f"Adding new category. New FSM state is {await state.get_state()}.")
         await callback.message.answer(text=i18n["transaction_add_new_category"])
     else:
-        transaction_data = await state.get_data()
-        logger.debug(
-            f"Expense was added to category. New FSM state is {await state.get_state()}."
+        logger.info(
+            f"Expense was added to category. New FSM state is "
+            f"{await state.get_state()}."
         )
 
         await state.update_data(category_name=category_name)
         await state.set_state(FSMAddTransaction.confirm_transaction)
+        transaction_data = await state.get_data()
         await callback.message.answer(
             text=i18n["transaction_expense_added"].format(
                 expense_name=transaction_data["expense_name"],
-                category_name=category_name,
+                category_name=transaction_data["category_name"],
             )
             + i18n["transaction_info"].format(
                 expense_name=transaction_data["expense_name"],
-                category_name=category_name,
+                category_name=transaction_data["category_name"],
                 cost=transaction_data["cost"],
                 amount=transaction_data["amount"],
                 created_date=transaction_data["created_date"],
@@ -133,11 +141,15 @@ async def process_add_expense(
 
 @router.message(StateFilter(FSMAddTransaction.confirm_transaction))
 async def process_confirm_transaction(
-    message: Message, i18n: dict[str, str], state: FSMContext
+    message: Message,
+    i18n: dict[str, str],
+    state: FSMContext,
+    async_session: AsyncSession,
 ):
     if message.text == i18n["transaction_confirm_button"]:
         transaction_data = await state.get_data()
-        add_transaction_to_db(
+        await db.add_transaction(
+            async_session=async_session,
             telegram_id=message.from_user.id,
             expense_name=transaction_data["expense_name"],
             category_name=transaction_data["category_name"],
@@ -147,7 +159,7 @@ async def process_confirm_transaction(
             comment=transaction_data["comment"],
         )
         await state.set_state(FSMAddTransaction.fill_transaction)
-        logger.debug(
+        logger.info(
             f"Transaction was sent to db. New FSM state is {await state.get_state()}."
         )
         await message.answer(
@@ -156,8 +168,9 @@ async def process_confirm_transaction(
         )
     elif message.text == i18n["transaction_correct_button"]:
         await state.set_state(FSMAddTransaction.correct_transaction)
-        logger.debug(
-            f"Request to correct transaction. New FSM state is {await state.get_state()}."
+        logger.info(
+            f"Request to correct transaction was got. New FSM state is "
+            f"{await state.get_state()}."
         )
         await message.answer(
             text=i18n["transaction_correct"],
@@ -172,7 +185,7 @@ async def process_confirm_transaction(
         )
     elif message.text == i18n["transaction_cancel_button"]:
         await state.set_state(FSMAddTransaction.fill_transaction)
-        logger.debug(
+        logger.info(
             f"Transaction was canceled. New FSM state is {await state.get_state()}."
         )
         await message.answer(
@@ -180,7 +193,7 @@ async def process_confirm_transaction(
             reply_markup=ReplyKeyboardRemove(),
         )
     else:
-        logger.debug(
+        logger.info(
             "Instead of confirm/cancel/correct transaction was sent something else."
         )
         await message.answer(
@@ -194,10 +207,10 @@ async def process_confirm_transaction(
 async def process_correct_category_name_transaction(
     message: Message, i18n: dict[str, str], state: FSMContext, category_name: str
 ):
-    transaction_data = await state.get_data()
     await state.update_data(category_name=category_name)
     await state.set_state(FSMAddTransaction.confirm_transaction)
-    logger.debug(
+    transaction_data = await state.get_data()
+    logger.info(
         f"New category was defined. New FSM state is {await state.get_state()}."
     )
     await message.answer(
@@ -207,7 +220,7 @@ async def process_correct_category_name_transaction(
         )
         + i18n["transaction_info"].format(
             expense_name=transaction_data["expense_name"],
-            category_name=category_name,
+            category_name=transaction_data["category_name"],
             cost=transaction_data["cost"],
             amount=transaction_data["amount"],
             created_date=transaction_data["created_date"],
@@ -237,12 +250,16 @@ async def process_incorrect_category_name_transaction(
 
 @router.message(StateFilter(FSMAddTransaction.correct_transaction))
 async def process_change_transaction_info(
-    message: Message, i18n: dict[str, str], state: FSMContext
+    message: Message,
+    i18n: dict[str, str],
+    state: FSMContext,
+    async_session: AsyncSession,
 ):
     if message.text == i18n["transaction_correct_expense_name_button"]:
         await state.set_state(FSMChangeTransaction.change_expense_name)
-        logger.debug(
-            f"Request to correct expense name. New FSM state is {await state.get_state()}."
+        logger.info(
+            f"Request to correct expense name. New FSM state is "
+            f"{await state.get_state()}."
         )
         await message.answer(
             text=i18n["transaction_change_expense_name"],
@@ -250,18 +267,22 @@ async def process_change_transaction_info(
         )
     elif message.text == i18n["transaction_correct_category_button"]:
         await state.set_state(FSMAddTransaction.add_new_expense)
-        logger.debug(
+        logger.info(
             f"Request to correct category. New FSM state is {await state.get_state()}."
+        )
+        user_categories = await db.get_all_user_categories(
+            async_session, message.from_user.id
         )
         await message.answer(
             text=i18n["transaction_change_category"],
             reply_markup=create_categories_keyboard(
-                message.from_user.id, i18n["transaction_add_new_category_callback"]
+                user_categories,
+                i18n["transaction_add_new_category_callback"],
             ),
         )
     elif message.text == i18n["transaction_correct_cost_button"]:
         await state.set_state(FSMChangeTransaction.change_cost)
-        logger.debug(
+        logger.info(
             f"Request to correct cost. New FSM state is {await state.get_state()}."
         )
         await message.answer(
@@ -269,7 +290,7 @@ async def process_change_transaction_info(
         )
     elif message.text == i18n["transaction_correct_amount_button"]:
         await state.set_state(FSMChangeTransaction.change_amount)
-        logger.debug(
+        logger.info(
             f"Request to correct amount. New FSM state is {await state.get_state()}."
         )
         await message.answer(
@@ -277,8 +298,9 @@ async def process_change_transaction_info(
         )
     elif message.text == i18n["transaction_correct_created_date_button"]:
         await state.set_state(FSMChangeTransaction.change_created_date)
-        logger.debug(
-            f"Request to correct created_date. New FSM state is {await state.get_state()}."
+        logger.info(
+            f"Request to correct created_date. New FSM state is "
+            f"{await state.get_state()}."
         )
         await message.answer(
             text=i18n["transaction_change_created_date"],

@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 async def add_user(
-    async_session: async_sessionmaker[AsyncSession], telegram_id: int, user_name: str
+    async_session: AsyncSession, telegram_id: int, user_name: str
 ) -> None:
     """
     Add user information to database.
@@ -22,10 +22,9 @@ async def add_user(
         user_name (str): user Telegram name
     """
     try:
-        async with async_session() as session:
-            async with session.begin():
-                session.add(User(telegram_id=telegram_id, user_name=user_name))
-                logger.info(f"User {telegram_id} was added to db.")
+        async with async_session.begin():
+            async_session.add(User(telegram_id=telegram_id, user_name=user_name))
+            logger.info(f"User {telegram_id} was added to db.")
     except IntegrityError:
         logger.warning(f"Attempt to add an existing user: {telegram_id}.")
 
@@ -149,7 +148,7 @@ async def add_expense(
 
 
 async def get_expense_info(
-    async_session: async_sessionmaker[AsyncSession], telegram_id: int, expense_name: str
+    async_session: AsyncSession, telegram_id: int, expense_name: str
 ) -> Optional[Expense]:
     """
     Get expense information from database.
@@ -161,54 +160,84 @@ async def get_expense_info(
     Returns:
         Expense: instance of Expense table class with required expense info
     """
-    async with async_session() as session:
-        req = (
-            select(Expense)
-            .join(Expense.category_id)
-            .join(Category.user_id)
-            .where(Expense.expense_name == expense_name)
-            .where(User.telegram_id == telegram_id)
-            .order_by(Expense.expense_id)
+    req = (
+        select(Expense)
+        .join(Expense.category_id)
+        .join(Category.user_id)
+        .where(Expense.expense_name == expense_name)
+        .where(User.telegram_id == telegram_id)
+        .order_by(Expense.expense_id)
+    )
+    result = await async_session.execute(req)
+    try:
+        expense_info = result.scalar_one()
+        logger.info(f"Info for expense {expense_name} was got from db.")
+        return expense_info
+    except NoResultFound:
+        logger.warning(f"Info for expense {expense_name} wasn't found in db.")
+
+
+async def get_expense_category_name(
+    async_session: AsyncSession, telegram_id: int, expense_name: str
+) -> Optional[str]:
+    """Get expense category name from database.
+
+    Args:
+        async_session (AsyncSession): asynchronous session to request data from db
+        telegram_id (int): user telegram ID
+        expense_name (str): expense name for which need to request category name
+
+    Returns:
+        Optional[str]: required category name or None if category name for requiered
+            expense wasn't found in db
+    """
+    req = (
+        select(Category.category_name)
+        .join(Expense.category_id)
+        .join(User.user_id)
+        .where(Expense.expense_name == expense_name)
+        .where(User.telegram_id == telegram_id)
+    )
+    result = await async_session.execute(req)
+    try:
+        expense_category_name = result.scalar_one()
+        logger.info(
+            f"Category name for expense {expense_name} for user {telegram_id} was "
+            f"got from db."
         )
-        result = await session.execute(req)
-        try:
-            expense_info = result.scalar_one()
-            logger.info(f"Info for expense {expense_name} was got from db.")
-            return expense_info
-        except NoResultFound:
-            logger.warning(f"Info for expense {expense_name} wasn't found in db.")
+        return expense_category_name
+    except NoResultFound:
+        logger.info(
+            f"Category for expense {expense_name} for user {telegram_id} wasn't "
+            f"found in db."
+        )
 
 
 async def get_all_user_categories(
-    async_session: async_sessionmaker[AsyncSession], telegram_id: int
+    async_session: AsyncSession, telegram_id: int
 ) -> Optional[list[str]]:
     """
     Get all categories names for required user from database.
 
     Args:
+        async_session (AsyncSession): asynchronous session to request data from db
         telegram_id (int): user Telegram ID
 
     Returns:
         list[str]: list of categories names for required user if existed else None
     """
-    async with async_session() as session:
-        req = (
-            select(Category)
-            .join(Category.user_id)
-            .where(User.telegram_id == telegram_id)
-        )
-        result = await session.execute(req)
+    req = select(Category).join(Category.user_id).where(User.telegram_id == telegram_id)
+    result = await async_session.execute(req)
 
-        categories_lst = []
-        try:
-            for category_info in result.scalars().all():
-                categories_lst.append(category_info.category_name)
-            logger.info(
-                f"{len(categories_lst)} categories for user {telegram_id} were found "
-                f"in db."
-            )
-        except NoResultFound:
-            logger.info(f"Noone category for user {telegram_id} wasn't found ib db.")
+    categories_lst = []
+    try:
+        for category_info in result.scalars().all():
+            categories_lst.append(category_info.category_name)
+        logger.info(
+            f"{len(categories_lst)} categories for user {telegram_id} were found in db."
+        )
+    except NoResultFound:
+        logger.info(f"Noone category for user {telegram_id} wasn't found ib db.")
 
 
 async def add_transaction(

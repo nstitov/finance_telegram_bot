@@ -5,6 +5,7 @@ from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup, default_state
 from aiogram.types import Message
+from sqlalchemy.ext.asyncio import AsyncSession
 
 import database.db_requests as db
 
@@ -21,9 +22,13 @@ class FSMAddTransaction(StatesGroup):
 
 
 @router.message(Command("start"), StateFilter(default_state))
-async def process_start_command(message: Message, i18n: dict[str, str]):
+async def process_start_command(
+    message: Message,
+    i18n: dict[str, str],
+    session: AsyncSession,
+):
     logger.info(f"User {message.from_user.id} sent /start command.")
-    await db.add_user(message.from_user.id, message.from_user.first_name)
+    await db.add_user(session, message.from_user.id, message.from_user.first_name)
     await message.answer(text=i18n["/start"])
 
 

@@ -6,26 +6,31 @@ from aiogram.types import (
 )
 from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
 
-from database.db_requests1 import get_all_user_categories
 from keyboards.cbdata import CategoriesCallbackFactory
 
 
-def create_categories_keyboard(
-    telegram_id: int, add_new_category_text: str
+async def create_categories_keyboard(
+    user_categories: list[str], add_new_category_text: str
 ) -> InlineKeyboardMarkup:
+    """Create inline keyboard with available categories for user.
+
+    Args:
+        categories (list[str]): list with available categories
+        add_new_category_text (str): text for button to add new category
+
+    Returns:
+        InlineKeyboardMarkup: markup of inline keyboard with available categories and
+            button to add new category
+    """
     keyboard = InlineKeyboardBuilder()
-    user_categories = get_all_user_categories(telegram_id)
-    if user_categories:
-        for category in user_categories:
-            keyboard.row(
-                InlineKeyboardButton(
-                    text=category,
-                    callback_data=CategoriesCallbackFactory(
-                        category_name=category
-                    ).pack(),
-                ),
-                width=4,
-            )
+    for category in user_categories:
+        keyboard.row(
+            InlineKeyboardButton(
+                text=category,
+                callback_data=CategoriesCallbackFactory(category_name=category).pack(),
+            ),
+            width=4,
+        )
     keyboard.row(
         InlineKeyboardButton(
             text=add_new_category_text,
@@ -41,6 +46,16 @@ def create_categories_keyboard(
 def create_confirm_transaction_keyboard(
     confirm_text: str, correct_text: str, cancel_text: str
 ) -> ReplyKeyboardMarkup:
+    """Create keyboard for transaction confirmation.
+
+    Args:
+        confirm_text (str): text for button to confirm transaction
+        corrent_text (str): text for button to corrent transaction
+        cancel_text (str): text for button to cancel transaction
+
+    Returns:
+        ReplyKeyboardMarkup: murkup of keyboard with buttons to manage transaction
+    """
     confirm_keyboard = ReplyKeyboardBuilder()
     confirm_keyboard.row(
         KeyboardButton(text=confirm_text),
@@ -59,6 +74,19 @@ def create_correct_transaction_keyboard(
     change_created_date_button_text: str,
     change_comment_button_text: str,
 ) -> ReplyKeyboardMarkup:
+    """Create keyboard for correction transaction.
+
+    Args:
+        change_expense_name_button_text (str): text for button to change expense name
+        change_category_button_text (str): text for button to change category name
+        change_cost_button_text (str): text for button to change expense cost
+        change_amount_button_text (str): text for button to change amount of expense
+        change_created_date_button_text (str): text for button to change date of expense
+        change_comment_button_text (str): text for button to change comment for expense
+
+    Returns:
+        ReplyKeyboardMarkup: murkup of keyboard with button to correct transaction
+    """
     correct_keyboard = ReplyKeyboardBuilder()
     correct_keyboard.row(
         KeyboardButton(text=change_expense_name_button_text),
