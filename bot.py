@@ -4,8 +4,10 @@ import logging
 from aiogram import Bot, Dispatcher, F
 from aiogram.client.bot import DefaultBotProperties
 from aiogram.fsm.storage.memory import MemoryStorage
+from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
 from config_data.config import config
+from database.db_models import Base
 from handlers.change_transaction_handlers import router as change_transaction_router
 from handlers.command_handlers import router as default_commands_router
 from handlers.ignore_handlers import router as ignore_router
@@ -18,6 +20,11 @@ logger = logging.getLogger("bot")
 
 
 async def main():
+    engine = create_async_engine(config.db.postgres_dsn, future=True, echo=True)
+    db_pool = async_sessionmaker(engine, expire_on_commit=False)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
     bot = Bot(
         token=config.tg_bot.token,
         default=DefaultBotProperties(parse_mode="HTML"),
