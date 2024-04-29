@@ -15,7 +15,9 @@ class User(Base):
     user_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     telegram_id: Mapped[int] = mapped_column(BigInteger, nullable=False, unique=True)
     user_name: Mapped[str]
-    reg_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+    reg_date: Mapped[datetime] = mapped_column(
+        DateTime(timezone=False), server_default=func.now()
+    )
 
     categories: Mapped[List["Category"]] = relationship(
         back_populates="user", cascade="all, delete"
@@ -54,7 +56,7 @@ class Transaction(Base):
     transaction_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     expense_id: Mapped[int] = mapped_column(ForeignKey("Expense.expense_id"))
     cost: Mapped[float] = mapped_column(nullable=False)
-    created_date: Mapped[datetime] = mapped_column(server_default=func.now())
+    created_date: Mapped[datetime] = mapped_column(DateTime(timezone=False))
     amount: Mapped[int] = mapped_column(default=1)
     comment: Mapped[str] = mapped_column(server_default=null())
 
