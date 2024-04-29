@@ -1,26 +1,14 @@
 import asyncio
 import logging
-import logging.config
-import os
 
-import yaml
 from aiogram import Bot, Dispatcher, F
 from aiogram.client.bot import DefaultBotProperties
 from aiogram.fsm.storage.memory import MemoryStorage
 
-if not os.path.exists(os.path.join(os.path.dirname(__file__), "Logs")):
-    os.makedirs(os.path.join(os.path.dirname(__file__), "Logs"))
-
-if __name__ == "__main__":
-    with open(
-        os.path.join(os.path.dirname(__file__), "config_data/logging_config.yaml"), "rt"
-    ) as f:
-        logging_config = yaml.safe_load(f.read())
-    logging.config.dictConfig(logging_config)
-
 from config_data.config import config
 from handlers.change_transaction_handlers import router as change_transaction_router
 from handlers.command_handlers import router as default_commands_router
+from handlers.ignore_handlers import router as ignore_router
 from handlers.transactions_handlers import router as transactions_router
 from keyboards.set_menu import set_main_menu
 from lexicon.lexicon import translations
@@ -43,6 +31,7 @@ async def main():
     dp.include_router(default_commands_router)
     dp.include_router(transactions_router)
     dp.include_router(change_transaction_router)
+    dp.include_router(ignore_router)
 
     await set_main_menu(bot)
 
@@ -50,4 +39,9 @@ async def main():
     await dp.start_polling(bot)
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    import asyncio
+
+    import __init__
+
+    asyncio.run(main())

@@ -22,11 +22,17 @@ class FSMAddTransaction(StatesGroup):
 
 @router.message(Command("start"), StateFilter(default_state))
 async def process_start_command(message: Message, i18n: dict[str, str]):
-    logger.info(f"User {message.from_user.full_name} sent /start command.")
+    logger.info(f"User {message.from_user.id} sent /start command.")
     add_user_to_db(
         message.from_user.id,
         message.from_user.first_name,
     )
+    await message.answer(text=i18n["/start"])
+
+
+@router.message(Command("help"))
+async def process_help_command(message: Message, i18n: dict[str, str]):
+    logger.info(f"user {message.from_user.id} sent /help command.")
     await message.answer(text=i18n["/start"])
 
 
