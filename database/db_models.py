@@ -10,7 +10,7 @@ class Base(DeclarativeBase):
 
 
 class User(Base):
-    __tablename__ = "User"
+    __tablename__ = "user_table"
 
     user_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     telegram_id: Mapped[int] = mapped_column(BigInteger, nullable=False, unique=True)
@@ -25,11 +25,11 @@ class User(Base):
 
 
 class Category(Base):
-    __tablename__ = "Category"
+    __tablename__ = "category_table"
 
     category_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     category_name: Mapped[str]
-    user_id: Mapped[int] = mapped_column(ForeignKey("User.user_id"))
+    user_id: Mapped[int] = mapped_column(ForeignKey("user_table.user_id"))
 
     user: Mapped["User"] = relationship(back_populates="categories")
     expenses: Mapped[List["Expense"]] = relationship(
@@ -38,11 +38,11 @@ class Category(Base):
 
 
 class Expense(Base):
-    __tablename__ = "Expense"
+    __tablename__ = "expense_table"
 
     expense_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     expense_name: Mapped[str]
-    category_id: Mapped[int] = mapped_column(ForeignKey("Category.category_id"))
+    category_id: Mapped[int] = mapped_column(ForeignKey("category_table.category_id"))
 
     category: Mapped["Category"] = relationship(back_populates="expenses")
     transactions: Mapped[List["Transaction"]] = relationship(
@@ -51,10 +51,10 @@ class Expense(Base):
 
 
 class Transaction(Base):
-    __tablename__ = "Transaction"
+    __tablename__ = "transaction_table"
 
     transaction_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    expense_id: Mapped[int] = mapped_column(ForeignKey("Expense.expense_id"))
+    expense_id: Mapped[int] = mapped_column(ForeignKey("expense_table.expense_id"))
     cost: Mapped[float] = mapped_column(nullable=False)
     created_date: Mapped[datetime] = mapped_column(DateTime(timezone=False))
     amount: Mapped[int] = mapped_column(default=1)

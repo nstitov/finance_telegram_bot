@@ -9,7 +9,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
 from keyboards.cbdata import CategoriesCallbackFactory
 
 
-async def create_categories_keyboard(
+def create_categories_keyboard(
     user_categories: list[str], add_new_category_text: str
 ) -> InlineKeyboardMarkup:
     """Create inline keyboard with available categories for user.

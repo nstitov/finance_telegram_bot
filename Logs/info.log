@@ -1,24 +1,21 @@
-[2024-04-17 19:19:48] #INFO     command_handlers.py:25 - handlers.command_handlers - User Titov Nikita sent /start command.
-[2024-04-17 19:19:48] #INFO     db_requests.py:34 - database.db_requests - User with Telegram ID 474783927 was added to database.
-[2024-04-17 19:19:53] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-04-17 19:19:58] #INFO     db_requests.py:195 - database.db_requests - Expense info Молоко for user 474783927 was got.
-[2024-04-17 19:20:17] #INFO     db_requests.py:124 - database.db_requests - Category ID for category Продукты for user with Telegram ID 474783927 was got from database.
-[2024-04-17 19:20:17] #INFO     db_requests.py:195 - database.db_requests - Expense info Молоко for user 474783927 was got.
-[2024-04-17 19:20:17] #INFO     db_requests.py:270 - database.db_requests - Transaction for user 474783927 was added to db.
-[2024-04-17 19:20:25] #INFO     db_requests.py:197 - database.db_requests - Expense info Колеса for user 474783927 wasn't found.
-[2024-04-17 19:20:25] #INFO     db_requests.py:223 - database.db_requests - Category names for user 474783927 was got from db.
-[2024-04-17 19:20:39] #INFO     db_requests.py:63 - database.db_requests - Info for user with Telegram ID 474783927 was got from database.
-[2024-04-17 19:20:39] #INFO     db_requests.py:90 - database.db_requests - Category Машина for user with Telegram ID 474783927 was added to database.
-[2024-04-17 19:20:39] #INFO     db_requests.py:197 - database.db_requests - Expense info Колеса for user 474783927 wasn't found.
-[2024-04-17 19:20:39] #INFO     db_requests.py:153 - database.db_requests - Expense Колеса in category with ID 3 was added to database.
-[2024-04-17 19:20:39] #INFO     db_requests.py:270 - database.db_requests - Transaction for user 474783927 was added to db.
-[2024-04-17 19:20:56] #INFO     db_requests.py:197 - database.db_requests - Expense info Крем 1000 for user 474783927 wasn't found.
-[2024-04-17 19:20:56] #INFO     db_requests.py:223 - database.db_requests - Category names for user 474783927 was got from db.
-[2024-04-17 19:21:39] #INFO     db_requests.py:63 - database.db_requests - Info for user with Telegram ID 474783927 was got from database.
-[2024-04-17 19:21:39] #INFO     db_requests.py:90 - database.db_requests - Category Лекарства for user with Telegram ID 474783927 was added to database.
-[2024-04-17 19:21:39] #INFO     db_requests.py:197 - database.db_requests - Expense info Крем for user 474783927 wasn't found.
-[2024-04-17 19:21:39] #INFO     db_requests.py:153 - database.db_requests - Expense Крем in category with ID 4 was added to database.
-[2024-04-17 19:21:39] #INFO     db_requests.py:270 - database.db_requests - Transaction for user 474783927 was added to db.
-[2024-04-17 19:21:41] #INFO     command_handlers.py:42 - handlers.command_handlers - User Titov Nikita sent /cancel command from FSMAddTransaction:fill_transaction state.
-[2024-04-17 19:22:02] #INFO     command_handlers.py:54 - handlers.command_handlers - User Titov Nikita was moved to transaction adding mode.
-[2024-04-17 19:22:44] #INFO     command_handlers.py:42 - handlers.command_handlers - User Titov Nikita sent /cancel command from FSMAddTransaction:fill_transaction state.
+[2024-05-02 19:33:03] #INFO     command_handlers.py:51 - handlers.command_handlers - User 474783927 sent /cancel command from FSMAddTransaction:confirm_transaction state.
+[2024-05-02 19:33:08] #INFO     command_handlers.py:63 - handlers.command_handlers - User 474783927 was moved to transaction adding mode.
+[2024-05-02 19:33:56] #INFO     command_handlers.py:51 - handlers.command_handlers - User 474783927 sent /cancel command from FSMAddTransaction:fill_transaction state.
+[2024-05-02 19:34:13] #INFO     command_handlers.py:63 - handlers.command_handlers - User 474783927 was moved to transaction adding mode.
+[2024-05-02 19:43:39] #INFO     command_handlers.py:51 - handlers.command_handlers - User 474783927 sent /cancel command from FSMAddTransaction:fill_transaction state.
+[2024-05-02 19:43:39] #INFO     command_handlers.py:51 - handlers.command_handlers - User 474783927 sent /cancel command from FSMAddTransaction:fill_transaction state.
+[2024-05-02 19:43:45] #INFO     command_handlers.py:63 - handlers.command_handlers - User 474783927 was moved to transaction adding mode.
+[2024-05-02 19:44:09] #INFO     db_requests.py:48 - database.db_requests - Info for user 474783927 was got from db.
+[2024-05-02 19:48:21] #INFO     command_handlers.py:51 - handlers.command_handlers - User 474783927 sent /cancel command from FSMAddTransaction:fill_transaction state.
+[2024-05-02 19:49:31] #INFO     command_handlers.py:63 - handlers.command_handlers - User 474783927 was moved to transaction adding mode.
+[2024-05-02 19:50:50] #INFO     db_requests.py:48 - database.db_requests - Info for user 474783927 was got from db.
+[2024-05-02 19:53:40] #INFO     command_handlers.py:51 - handlers.command_handlers - User 474783927 sent /cancel command from FSMAddTransaction:fill_transaction state.
+[2024-05-02 19:53:48] #INFO     command_handlers.py:63 - handlers.command_handlers - User 474783927 was moved to transaction adding mode.
+[2024-05-02 19:54:13] #INFO     db_requests.py:48 - database.db_requests - Info for user 474783927 was got from db.
+[2024-05-02 19:54:20] #INFO     transactions_handlers.py:110 - handlers.transactions_handlers - Transaction has incorrect format.
+[2024-05-02 19:54:48] #INFO     db_requests.py:48 - database.db_requests - Info for user 474783927 was got from db.
+[2024-05-02 19:56:02] #INFO     db_requests.py:48 - database.db_requests - Info for user 474783927 was got from db.
+[2024-05-02 19:57:07] #INFO     db_requests.py:48 - database.db_requests - Info for user 474783927 was got from db.
+[2024-05-02 20:08:51] #INFO     db_requests.py:48 - database.db_requests - Info for user 474783927 was got from db.
+[2024-05-02 20:08:55] #INFO     db_requests.py:205 - database.db_requests - Category for expense Молоко for user 474783927 wasn't found in db.
+[2024-05-02 20:09:27] #INFO     db_requests.py:48 - database.db_requests - Info for user 474783927 was got from db.
