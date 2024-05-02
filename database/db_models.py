@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from datetime import datetime
 from typing import List
 
@@ -61,3 +62,11 @@ class Transaction(Base):
     comment: Mapped[str] = mapped_column(server_default=null())
 
     expense: Mapped["Expense"] = relationship(back_populates="transactions")
+
+
+@dataclass(slots=True, frozen=True)
+class ExpenseCategory:
+    expense_name: str
+    expense_id: int
+    category_name: str
+    category_id: int

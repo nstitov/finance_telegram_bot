@@ -27,8 +27,8 @@ async def process_correct_transaction(
     message: Message,
     i18n: dict[str, str],
     local_user_id: int,
-    state: FSMContext,
     async_session: AsyncSession,
+    state: FSMContext,
     expense_name: str,
     cost: float,
 ):
@@ -39,36 +39,32 @@ async def process_correct_transaction(
         message (Message): update with message with correct transaction from user
         i18n (dict[str, str]): dict with lexicon depends on user language settings
         local_user_id (int): user ID in database
+        async_session (AsyncSession): asynchronous session for connection with db
         state (FSMContext): Finite State Machine for user with user state and
             transaction data
-        async_session (AsyncSession): asynchronous session for connection with db
         expense_name (str): name of expense received from message handled by filter
         cost (float): cost of expense received from message handled by filter
     """
-    created_date = date.today()
-    await state.update_data(
-        local_user_id=local_user_id,
-        expense_name=expense_name,
-        cost=cost,
-        created_date=created_date.isoformat(),
-        amount=1,
-        comment=None,
+    expense_category_info = await db.get_expense_category_info(
+        async_session, expense_name, local_user_id
     )
 
-    expense_category_name = await db.get_expense_info(
-        async_session,
-        message.from_user.id,
-        expense_name,
-    )
-    if not expense_category_name:
+    created_date = date.today()
+    if not expense_category_info:
+        await state.update_data(
+            local_user_id=local_user_id,
+            expense_name=expense_name,
+            cost=cost,
+            created_date=created_date.isoformat(),
+            amount=1,
+            comment=None,
+        )
+
         await state.set_state(FSMAddTransaction.add_new_expense)
         logger.info(
-            f"Expense {expense_name} wasn't in db. New FSM state is "
-            f"{await state.get_state()}."
+            f"Expense {expense_name} wasn't in db. New FSM state is adding new expense."
         )
-        user_categories = await db.get_all_user_categories(
-            async_session, message.from_user.id
-        )
+        user_categories = await db.get_all_user_categories(async_session, local_user_id)
         await message.answer(
             text=i18n["transaction_no_expense"],
             reply_markup=create_categories_keyboard(
@@ -77,16 +73,26 @@ async def process_correct_transaction(
             ),
         )
     else:
-        await state.update_data(category_name=expense_category_name)
+        await state.update_data(
+            local_user_id=local_user_id,
+            expense_name=expense_name,
+            expense_id=expense_category_info.expense_id,
+            category_name=expense_category_info.category_name,
+            category_id=expense_category_info.category_id,
+            cost=cost,
+            created_date=created_date.isoformat(),
+            amount=1,
+            comment=None,
+        )
         await state.set_state(FSMAddTransaction.confirm_transaction)
         logger.info(
-            f"Expense {expense_name} was found in db. New FSM state is "
-            f"{await state.get_state()}."
+            f"Expense {expense_name} was found in db. New FSM state is confirm "
+            f"transaction."
         )
         await message.answer(
             text=i18n["transaction_info"].format(
                 expense_name=expense_name,
-                category_name=expense_category_name,
+                category_name=expense_category_info.category_name,
                 cost=cost,
                 amount=1,
                 created_date=created_date.strftime("%d.%m.%Y"),

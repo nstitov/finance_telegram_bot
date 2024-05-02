@@ -1,12 +1,12 @@
 import logging
 from datetime import datetime
-from typing import Literal, Optional
+from typing import Optional
 
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError, NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from database.db_models import Category, Expense, Transaction, User
+from database.db_models import Category, Expense, ExpenseCategory, Transaction, User
 
 logger = logging.getLogger(__name__)
 
@@ -166,7 +166,7 @@ async def get_expense_info(
 
 async def get_expense_category_info(
     async_session: AsyncSession, expense_name: str, user_id: int
-) -> tuple[int, int, str]:
+) -> Optional[ExpenseCategory]:
     """
     Get expense information (expense_id, category_id, category_name) from database.
 
@@ -190,7 +190,7 @@ async def get_expense_category_info(
     try:
         expense_id, category_id, category_name = result.all()
         logger.info(f"Info for expense {expense_name} was got from db.")
-        return expense_id, category_id, category_name
+        return ExpenseCategory(expense_name, expense_id, category_name, category_id)
     except NoResultFound:
         logger.warning(f"Info for expense {expense_name} wasn't found in db.")
 

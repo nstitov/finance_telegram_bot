@@ -19,3 +19,5 @@
 [2024-05-02 20:08:51] #INFO     db_requests.py:48 - database.db_requests - Info for user 474783927 was got from db.
 [2024-05-02 20:08:55] #INFO     db_requests.py:205 - database.db_requests - Category for expense Молоко for user 474783927 wasn't found in db.
 [2024-05-02 20:09:27] #INFO     db_requests.py:48 - database.db_requests - Info for user 474783927 was got from db.
+[2024-05-02 22:27:24] #INFO     command_handlers.py:51 - handlers.command_handlers - User 474783927 sent /cancel command from FSMAddTransaction:fill_transaction state.
+[2024-05-02 22:27:25] #INFO     command_handlers.py:63 - handlers.command_handlers - User 474783927 was moved to transaction adding mode.
