@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime
+from datetime import date
 from typing import Optional
 
 from sqlalchemy import select
@@ -27,7 +27,7 @@ async def add_user(
             async_session.add(User(telegram_id=telegram_id, user_name=user_name))
             logger.info(f"User {telegram_id} was added to db.")
     except IntegrityError:
-        logger.warning(f"Attempt to add an existing user: {telegram_id}.")
+        logger.info(f"Attempt to add an existing user: {telegram_id}.")
 
 
 async def get_user_info(async_session: AsyncSession, telegram_id: int) -> User:
@@ -48,7 +48,7 @@ async def get_user_info(async_session: AsyncSession, telegram_id: int) -> User:
         logger.info(f"Info for user {telegram_id} was got from db.")
         return user_info
     except NoResultFound:
-        logger.warning(f"Info for user {telegram_id} wasn't found in db.")
+        logger.info(f"Info for user {telegram_id} wasn't found in db.")
 
 
 async def add_category(
@@ -67,10 +67,8 @@ async def add_category(
     Returns:
         int: category ID in database
     """
-    async with async_session.begin():
-
-        async_session.add(Category(category_name=category_name, user_id=user_id))
-        logger.info(f"Category {category_name} for user #{user_id} was added to db.")
+    async_session.add(Category(category_name=category_name, user_id=user_id))
+    logger.info(f"Category {category_name} for user #{user_id} was added to db.")
 
     req = select(Category).order_by(Category.category_id.desc()).limit(1)
     result = await async_session.execute(req)
@@ -88,7 +86,7 @@ async def get_category_info(
 
     Args:
         async_session (AsyncSession): asynchronous session for connection with db
-        telegram_id (int): local user ID in database
+        user_id (int): local user ID in database
         category_name (str): name of category
 
     Returns:
@@ -107,7 +105,7 @@ async def get_category_info(
         logger.info(f"Info for category {category_name} was got from db.")
         return category_info
     except NoResultFound:
-        logger.warning(f"Info for category {category_name} wasn't found in db.")
+        logger.info(f"Info for category {category_name} wasn't found in db.")
 
 
 async def add_expense(
@@ -126,9 +124,8 @@ async def add_expense(
     Returns:
         int: new expense ID in database
     """
-    async with async_session.begin():
-        async_session.add(Expense(expense_name=expense_name, category_id=category_id))
-        logger.info(f"Expense {expense_name} was added to db.")
+    async_session.add(Expense(expense_name=expense_name, category_id=category_id))
+    logger.info(f"Expense {expense_name} was added to db.")
 
     req = select(Expense).order_by(Expense.category_id.desc()).limit(1)
     result = await async_session.execute(req)
@@ -188,11 +185,11 @@ async def get_expense_category_info(
     )
     result = await async_session.execute(req)
     try:
-        expense_id, category_id, category_name = result.all()
+        expense_id, category_id, category_name = result.all()[0]
         logger.info(f"Info for expense {expense_name} was got from db.")
         return ExpenseCategory(expense_name, expense_id, category_name, category_id)
-    except NoResultFound:
-        logger.warning(f"Info for expense {expense_name} wasn't found in db.")
+    except (NoResultFound, ValueError, IndexError):
+        logger.info(f"Info for expense {expense_name} wasn't found in db.")
 
 
 async def get_all_user_categories(
@@ -203,7 +200,7 @@ async def get_all_user_categories(
 
     Args:
         async_session (AsyncSession): asynchronous session for connection with db
-        telegram_id (int): local user ID in db
+        user_id (int): local user ID in db
 
     Returns:
         list[str]: list of categories names for required user if existed else None
@@ -225,9 +222,10 @@ async def get_all_user_categories(
 
 async def add_transaction(
     async_session: AsyncSession,
+    user_id: int,
     expense_id: int,
     cost: float | int,
-    created_date: datetime,
+    created_date: date,
     amount: int,
     comment: str,
 ) -> None:
@@ -237,20 +235,21 @@ async def add_transaction(
 
     Args:
         async_session (AsyncSession): asynchronous session for connection with db
+        user_id (int): local user ID in db
         expense_id (int): expense ID in db
         cost (float): cost of expense
         created_date (date): date of expense
         amount (int): amount of expense
         comment (str): comment for expense
     """
-    async with async_session.begin():
-        async_session.add(
-            Transaction(
-                expense_id=expense_id,
-                cost=cost,
-                created_date=created_date,
-                amount=amount,
-                comment=comment,
-            )
+
+    async_session.add(
+        Transaction(
+            expense_id=expense_id,
+            cost=cost,
+            created_date=created_date,
+            amount=amount,
+            comment=comment,
         )
-        logger.info(f"Transaction was added to db.")
+    )
+    logger.info(f"Transaction for user #{user_id} was added to db.")

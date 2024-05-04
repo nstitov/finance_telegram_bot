@@ -1,4 +1,5 @@
 import asyncio
+from datetime import date
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
@@ -18,23 +19,12 @@ async def main():
 
     async with async_session() as session:
         await db.add_user(session, 1, "Nikita")
+    async with async_session() as session:
         user_info = await db.get_user_info(session, 1)
-    async with async_session() as session:
-        category_id = await db.add_category(session, 1, "Products")
-    async with async_session() as session:
-        expense_id = await db.add_expense(session, "Milk", category_id)
-    async with async_session() as session:
-        req = (
-            select(Expense.expense_id, Category.category_id, Category.category_name)
-            .join(Expense.category)
-            .join(Category.user)
-            .where(Expense.expense_name == "Milk")
-            .where(User.telegram_id == 1)
-        )
-        result = await session.execute(req)
-        for a in result.all():
-            b, c, d = a
-        pass
+        async with session.begin():
+            category_id = await db.add_category(session, 1, "Car")
+            expense_id = await db.add_expense(session, "Wheels", category_id)
+            await db.add_transaction(session, expense_id, 1, date.today(), 1, "-")
 
 
 asyncio.run(main())

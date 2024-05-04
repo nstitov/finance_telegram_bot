@@ -1,8 +1,8 @@
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import date, datetime
 from typing import List
 
-from sqlalchemy import BigInteger, DateTime, ForeignKey, func, null
+from sqlalchemy import BigInteger, Date, DateTime, ForeignKey, func, null
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -57,9 +57,9 @@ class Transaction(Base):
     transaction_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     expense_id: Mapped[int] = mapped_column(ForeignKey("expense_table.expense_id"))
     cost: Mapped[float] = mapped_column(nullable=False)
-    created_date: Mapped[datetime] = mapped_column(DateTime(timezone=False))
-    amount: Mapped[int] = mapped_column(default=1)
-    comment: Mapped[str] = mapped_column(server_default=null())
+    created_date: Mapped[date] = mapped_column(Date)
+    amount: Mapped[int]
+    comment: Mapped[str]
 
     expense: Mapped["Expense"] = relationship(back_populates="transactions")
 

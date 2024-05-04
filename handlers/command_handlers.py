@@ -25,10 +25,10 @@ class FSMAddTransaction(StatesGroup):
 async def process_start_command(
     message: Message,
     i18n: dict[str, str],
-    session: AsyncSession,
+    async_session: AsyncSession,
 ):
     logger.info(f"User {message.from_user.id} sent /start command.")
-    await db.add_user(session, message.from_user.id, message.from_user.first_name)
+    await db.add_user(async_session, message.from_user.id, message.from_user.first_name)
     await message.answer(text=i18n["/start"])
 
 

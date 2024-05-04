@@ -46,7 +46,7 @@ handlers:
 
 
 loggers:
-  database.db_init:
+  database.db_models:
     level: INFO
     handlers: [info_file_handler, error_file_handler, exception_console_handler]
 
@@ -74,11 +74,10 @@ loggers:
     level: INFO
     handlers: [info_file_handler, error_file_handler, exception_console_handler]
 
+  handlers.ignore_handlers:
+    level: INFO
+    handlers: [info_file_handler, error_file_handler, exception_console_handler]
+
   bot:
     level: INFO
-    handlers: [
-      info_file_handler,
-      error_file_handler,
-      info_console_handler,
-      exception_console_handler
-      ]
+    handlers: [info_file_handler, error_file_handler, exception_console_handler]

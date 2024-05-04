@@ -23,7 +23,7 @@ logger = logging.getLogger("bot")
 
 async def main():
     engine = create_async_engine(config.db.postgres_dsn, future=True, echo=False)
-    db_pool = async_sessionmaker(engine, expire_on_commit=False)
+    db_pool = async_sessionmaker(engine, expire_on_commit=True)
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
@@ -46,8 +46,6 @@ async def main():
     dp.message.outer_middleware(TranslatorMiddleware())
     dp.callback_query.outer_middleware(DbSessionMiddleware(db_pool))
     dp.callback_query.outer_middleware(TranslatorMiddleware())
-    transactions_router.message.middleware(GetUserIDMiddleware())
-    transactions_router.callback_query.middleware(GetUserIDMiddleware())
 
     dp.include_router(default_commands_router)
     dp.include_router(transactions_router)

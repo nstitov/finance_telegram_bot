@@ -16,5 +16,8 @@ class GetUserIDMiddleware(BaseMiddleware):
         """Middleware to get local user ID from database."""
         user: User = data.get("event_from_user")
         user_info = await get_user_info(data["async_session"], user.id)
-        data["local_user_id"] = user_info.user_id
-        return await handler(event, data)
+        if not user_info:
+            await event.answer(text="Сначала необходимо отправить боту команду /start")
+        else:
+            data["local_user_id"] = user_info.user_id
+            return await handler(event, data)
