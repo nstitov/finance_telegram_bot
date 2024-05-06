@@ -3,7 +3,6 @@ FROM python:3.11-slim-bullseye as compile-image
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 COPY requirements.txt .
-COPY .env .
 RUN apt-get update \
  && apt-get install -y gcc \
  && pip install --no-cache-dir --upgrade pip \
@@ -17,4 +16,5 @@ COPY --from=compile-image /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 WORKDIR /app
 COPY bot /app/bot
+COPY .env /app
 CMD ["python", "-m", "bot"]

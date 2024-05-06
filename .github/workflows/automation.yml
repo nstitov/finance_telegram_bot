@@ -1,8 +1,7 @@
-# Название воркфлоу. Выбирайте на свой вкус
-name: "automate-all-the-things"
+# Название воркфлоу
+name: "docker_image_builder"
 
-# Триггеры ( = условия), при которых воркфлоу сработает
-# В данном случае: на каждый пуш в ветку master
+# Триггеры, при которых воркфлоу сработает
 on:
   push:
     branches:
@@ -13,15 +12,13 @@ jobs:
   # Название задачи, которое будет отображаться в GitHub
   build_and_push:
     # На каком виртуальном сервере будет выполняться задача
-    # В данном случае, на свежайшей версии Ubuntu. Неплохой выбор.
     runs-on: ubuntu-latest
-    # Шаги выполнения задачи (о них ниже по тексту)
+    # Шаги выполнения задачи
     steps:
       -
         name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          # Те самые "секреты" из настроек репозитория
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
@@ -29,6 +26,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          # С каким тегом будет загружен образ
-          # Переменные тоже поддерживаются
-          tags: nstitov/test-docker-push:latest
+          tags: nstitov/finance_tg_bot:latest
