@@ -11,7 +11,7 @@ formatters:
 
 filters:
   info_filter:
-    (): config_data.logging_services.InfoLogFilter
+    (): bot.config_data.logging_services.InfoLogFilter
 
 
 handlers:
@@ -28,7 +28,7 @@ handlers:
     stream: "ext://sys.stderr"
 
   info_file_handler:
-      class: config_data.logging_services.LogRotatiingFileHandler
+      class: bot.config_data.logging_services.LogRotatiingFileHandler
       formatter: default_formatter
       level: INFO
       filename: Logs/info.log
@@ -46,38 +46,38 @@ handlers:
 
 
 loggers:
-  database.db_models:
+  bot.database.db_models:
     level: INFO
     handlers: [info_file_handler, error_file_handler, exception_console_handler]
 
-  database.db_requests:
+  bot.database.db_requests:
     level: INFO
     handlers: [info_file_handler, error_file_handler, exception_console_handler]
 
-  database.db_statistic_requests:
+  bot.database.db_statistic_requests:
     level: INFO
     handlers: [info_file_handler, error_file_handler, exception_console_handler]
 
-  handlers.command_handlers:
+  bot.handlers.command_handlers:
     level: INFO
     handlers: [info_file_handler, error_file_handler, exception_console_handler]
 
-  handlers.transactions_handlers:
+  bot.handlers.transactions_handlers:
     level: INFO
     handlers: [info_file_handler, error_file_handler, exception_console_handler]
 
-  handlers.change_transaction_handlers:
+  bot.handlers.change_transaction_handlers:
     level: INFO
     handlers: [info_file_handler, error_file_handler, exception_console_handler]
 
-  handlers.statistic_handlers:
+  bot.handlers.statistic_handlers:
     level: INFO
     handlers: [info_file_handler, error_file_handler, exception_console_handler]
 
-  handlers.ignore_handlers:
+  bot.handlers.ignore_handlers:
     level: INFO
     handlers: [info_file_handler, error_file_handler, exception_console_handler]
 
-  bot:
+  bot.__main__:
     level: INFO
     handlers: [info_file_handler, error_file_handler, exception_console_handler]

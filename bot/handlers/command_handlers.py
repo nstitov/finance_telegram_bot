@@ -7,7 +7,7 @@ from aiogram.fsm.state import State, StatesGroup, default_state
 from aiogram.types import Message
 from sqlalchemy.ext.asyncio import AsyncSession
 
-import database.db_requests as db
+import bot.database.db_requests as db
 
 router = Router()
 logger = logging.getLogger(__name__)

@@ -4,8 +4,8 @@ from datetime import date
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
-import database.db_requests as db
-from database.db_models import Base, Category, Expense, User
+import bot.database.db_requests as db
+from bot.database.db_models import Base, Category, Expense, User
 
 
 async def main():

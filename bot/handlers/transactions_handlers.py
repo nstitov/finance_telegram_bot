@@ -7,12 +7,12 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message, ReplyKeyboardRemove
 from sqlalchemy.ext.asyncio import AsyncSession
 
-import database.db_requests as db
-from filters.filters import IsCorrectCategoryName, IsCorrectTransaction
-from handlers.change_transaction_handlers import FSMChangeTransaction
-from handlers.command_handlers import FSMAddTransaction
-from keyboards.cbdata import CategoriesCallbackFactory
-from keyboards.kb_users import (
+import bot.database.db_requests as db
+from bot.filters.filters import IsCorrectCategoryName, IsCorrectTransaction
+from bot.handlers.change_transaction_handlers import FSMChangeTransaction
+from bot.handlers.command_handlers import FSMAddTransaction
+from bot.keyboards.cbdata import CategoriesCallbackFactory
+from bot.keyboards.kb_users import (
     create_categories_keyboard,
     create_confirm_transaction_keyboard,
     create_correct_transaction_keyboard,

@@ -6,7 +6,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError, NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from database.db_models import Category, Expense, ExpenseCategory, Transaction, User
+from bot.database.db_models import Category, Expense, ExpenseCategory, Transaction, User
 
 logger = logging.getLogger(__name__)
 

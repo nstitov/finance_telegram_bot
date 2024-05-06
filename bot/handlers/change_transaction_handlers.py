@@ -7,15 +7,15 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message
 
-from filters.filters import (
+from bot.filters.filters import (
     IsCorrectAmountFilter,
     IsCorrectComment,
     IsCorrectCostFilter,
     IsCorrectCreatedDateFilter,
     IsCorrectExpenseNameFilter,
 )
-from handlers.command_handlers import FSMAddTransaction
-from keyboards.kb_users import create_confirm_transaction_keyboard
+from bot.handlers.command_handlers import FSMAddTransaction
+from bot.keyboards.kb_users import create_confirm_transaction_keyboard
 
 
 class FSMChangeTransaction(StatesGroup):

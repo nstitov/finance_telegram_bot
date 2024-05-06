@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import logging.config
 
 from aiogram import Bot, Dispatcher, F
 from aiogram.client.bot import DefaultBotProperties
@@ -7,34 +8,33 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.storage.redis import RedisStorage
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
-from config_data.config import config
-from database.db_models import Base
-from handlers.change_transaction_handlers import router as change_transaction_router
-from handlers.command_handlers import router as default_commands_router
-from handlers.ignore_handlers import router as ignore_router
-from handlers.transactions_handlers import router as transactions_router
-from keyboards.set_menu import set_main_menu
-from lexicon.lexicon import translations
-from middlewares.inner_middlewares import GetUserIDMiddleware
-from middlewares.outer_middlewares import DbSessionMiddleware, TranslatorMiddleware
+from bot.config_data.configreader import config
+from bot.database.db_models import Base
+from bot.handlers.change_transaction_handlers import router as change_transaction_router
+from bot.handlers.command_handlers import router as default_commands_router
+from bot.handlers.ignore_handlers import router as ignore_router
+from bot.handlers.transactions_handlers import router as transactions_router
+from bot.keyboards.set_menu import set_main_menu
+from bot.lexicon.lexicon import translations
+from bot.middlewares.outer_middlewares import DbSessionMiddleware, TranslatorMiddleware
 
 logger = logging.getLogger("bot")
 
 
 async def main():
-    engine = create_async_engine(config.db.postgres_dsn, future=True, echo=False)
+    engine = create_async_engine(config.postgres_dsn, future=True, echo=False)
     db_pool = async_sessionmaker(engine, expire_on_commit=True)
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
     bot = Bot(
-        token=config.tg_bot.token,
+        token=config.bot_token,
         default=DefaultBotProperties(parse_mode="HTML"),
     )
 
-    if config.tg_bot.storage == "redis":
+    if config.bot_fsm_storage == "redis":
         dp = Dispatcher(
-            storage=RedisStorage.from_url(config.redis.redis_dsn),
+            storage=RedisStorage.from_url(config.redis_dsn),
             _translations=translations,
         )
     else:
@@ -59,9 +59,4 @@ async def main():
     print("Bot finished.")
 
 
-if __name__ == "__main__":
-    import asyncio
-
-    import __init__
-
-    asyncio.run(main())
+asyncio.run(main())

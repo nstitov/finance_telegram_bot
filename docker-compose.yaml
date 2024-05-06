@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+    redis:
+        container_name: container-redis
+        image: redis:6-alpine
+        potrs:
+            - "6379:6379"
+        restart: "unless-stopped"
+        volumes:
+            - "./redis/config:/usr/local/etc/redis"
+            - "./redis/data:/data"
+        command: "redis-server /usr/local/etc/redis/redis.conf"
+    postgres:
+        container_name: container-postgres
+        image: postgres
+        hostname: localhost
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: ${SUPERUSER_NAME}
+            POSTGRES_PASSWORD: ${SUPERUSER_PASSWORD}
+        volumes:
+            - "./pg/data:/var/lib/postgresql/data"
+            - "./pg/init:/docker-entrypoint-initdb.d"
+        restart: "unless-stopped"
+    pgadmin:
+        container_name: container-pgadmin
+        image: dpage/pgadmin4
+        depends_on:
+            - postgres
+        ports:
+            - "5050:80"
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: root
+        restart: unless-stopped

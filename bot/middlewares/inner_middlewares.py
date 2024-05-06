@@ -3,7 +3,7 @@ from typing import Any, Awaitable, Callable
 from aiogram import BaseMiddleware
 from aiogram.types import CallbackQuery, Message, User
 
-from database.db_requests import get_user_info
+from bot.database.db_requests import get_user_info
 
 
 class GetUserIDMiddleware(BaseMiddleware):

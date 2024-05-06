@@ -3,7 +3,7 @@ import os
 
 import yaml
 
-logs_path = "Logs"
+logs_path = "../Logs"
 logger_config_file_path = "config_data/logging_config.yaml"
 
 if not os.path.exists(os.path.join(os.path.dirname(__file__), logs_path)):

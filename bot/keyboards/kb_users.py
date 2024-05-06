@@ -6,7 +6,7 @@ from aiogram.types import (
 )
 from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
 
-from keyboards.cbdata import CategoriesCallbackFactory
+from bot.keyboards.cbdata import CategoriesCallbackFactory
 
 
 def create_categories_keyboard(
