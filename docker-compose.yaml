@@ -4,7 +4,7 @@ services:
     redis:
         container_name: container-redis
         image: redis:6-alpine
-        potrs:
+        ports:
             - "6379:6379"
         restart: "unless-stopped"
         volumes:
@@ -14,7 +14,6 @@ services:
     postgres:
         container_name: container-postgres
         image: postgres
-        hostname: localhost
         ports:
             - "5432:5432"
         environment:
@@ -34,4 +33,13 @@ services:
         environment:
             PGADMIN_DEFAULT_EMAIL: admin@admin.com
             PGADMIN_DEFAULT_PASSWORD: root
-        restart: unless-stopped
+        restart: "unless-stopped"
+    finance-bot:
+        container_name: container-finance-bot
+        image: "nstitov/finance_tg_bot:latest"
+        restart: "no"
+        env_file: .env
+        depends_on:
+            - postgres
+            - pgadmin
+            - redis
